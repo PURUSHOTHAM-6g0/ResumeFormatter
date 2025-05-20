@@ -22,16 +22,21 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   header: {
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 100,
-    backgroundColor: "#000000",
-    color: "white",
-    padding: 20,
-    alignItems: "center",
+    backgroundColor: '#000000',
+    color: 'white',
+    padding: 15,
+    alignItems: 'center',        // Vertical center
+    justifyContent: 'center',    // Horizontal center for name
+    position: 'relative',        // Needed for absolute logo
   },
   logoContainer: {
-    justifyContent: "center",
-    alignItems: "flex-start",
+    position: 'absolute',
+    left: 15,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',    // Vertically center logo
   },
   logo: {
     width: 30,
@@ -40,8 +45,8 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: 900,
-    margin: 40,
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
+    color: 'white',
   },
   content: {
     flexDirection: "row",

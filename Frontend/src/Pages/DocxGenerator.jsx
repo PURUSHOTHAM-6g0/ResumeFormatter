@@ -165,108 +165,60 @@ const createStyledSections = (data) => {
     rows: [
       new TableRow({
         children: [
-          new TableCell({
-            children: [new Paragraph("")],
-            shading: { fill: "000000" },
-            borders: {
-              top: BorderStyle.NONE,
-              bottom: BorderStyle.NONE,
-              left: BorderStyle.NONE,
-              right: BorderStyle.NONE,
-            },
-          }),
-        ],
-        height: { value: 200, rule: "exact" }, // acts as vertical spacer
-      }),
-      // Row 1: Logo (top-left)
-      new TableRow({
-        children: [
+          // Logo cell - left side
           new TableCell({
             children: [
               new Paragraph({
-                alignment: AlignmentType.LEFT,
-                indent: { left: 300 }, // 5px left "margin"
-                spacing: { before: 100, after: 100 }, // 5px top/bottom "margin"
                 children: [
                   new ImageRun({
                     data: imageBytes,
                     transformation: {
-                      width: 45,
-                      height: 45,
+                      width: 40,
+                      height: 40,
                     },
                   }),
                 ],
-              }),
-            ],
-            verticalAlign: VerticalAlign.TOP,
-            shading: { fill: "000000" },
-            borders: {
-              top: BorderStyle.NONE,
-              bottom: BorderStyle.NONE,
-              left: BorderStyle.NONE,
-              right: BorderStyle.NONE,
-            },
-          }),
-        ],
-        height: { value: 800, rule: "exact" },
-      }),
-
-      // Row 2: Name (centered)
-      new TableRow({
-        children: [
-          new TableCell({
-            children: [
-              new Paragraph({
-                alignment: AlignmentType.CENTER,
-                children: [
-                  new TextRun({
-                    text: data.name || "Your Name",
-                    bold: true,
-                    color: "FFFFFF",
-                    size: 48,
-                    font: "Arial",
-                  }),
-                ],
-                spacing: { before: 100, after: 300 },
+                alignment: AlignmentType.LEFT,
               }),
             ],
             verticalAlign: VerticalAlign.CENTER,
             shading: { fill: "000000" },
-            borders: {
-              top: BorderStyle.NONE,
-              bottom: BorderStyle.NONE,
-              left: BorderStyle.NONE,
-              right: BorderStyle.NONE,
-            },
+            width: { size: 15, type: WidthType.PERCENTAGE }, // Reduced from 30% to 15%
+            margins: { top: 300, bottom: 300, left: 300, right: 0 }, // Removed right margin
           }),
-        ],
-        height: { value: 800, rule: "exact" },
-      }),
-      // Row 3: Spacer
-      new TableRow({
-        children: [
+          // Name cell - right side
           new TableCell({
-            children: [new Paragraph("")],
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.LEFT, // Changed from CENTER to LEFT
+                children: [
+                  new TextRun({
+                    text: data.name ? data.name.toUpperCase() : "YOUR NAME",
+                    bold: true,
+                    color: "FFFFFF",
+                    size: 44,
+                    font: "Arial",
+                  }),
+                ],
+              }),
+            ],
+            verticalAlign: VerticalAlign.CENTER,
             shading: { fill: "000000" },
-            borders: {
-              top: BorderStyle.NONE,
-              bottom: BorderStyle.NONE,
-              left: BorderStyle.NONE,
-              right: BorderStyle.NONE,
-            },
+            width: { size: 85, type: WidthType.PERCENTAGE }, // Increased from 70% to 85%
+            margins: { top: 300, bottom: 300, left: 1200, right: 300 },
           }),
         ],
-        height: { value: 400, rule: "exact" }, // acts as vertical spacer
+        height: { value: 1700, rule: "exact" },
       }),
     ],
     width: { size: 100, type: WidthType.PERCENTAGE },
     borders: {
-      top: BorderStyle.NONE,
-      bottom: BorderStyle.NONE,
-      left: BorderStyle.NONE,
-      right: BorderStyle.NONE,
-      insideHorizontal: BorderStyle.NONE,
-      insideVertical: BorderStyle.NONE,
+      top: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+      bottom: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+      left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+      right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+      insideHorizontal: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
+      insideVertical: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
     },
   });
 
