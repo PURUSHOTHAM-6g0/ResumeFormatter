@@ -1,0 +1,47 @@
+{
+    // Tells VS Code (and tooling that reads jsconfig) how to handle your project
+    "compilerOptions": {
+      /* ------------------------------------------------------------ */
+      /*  JS / JSX behaviour                                          */
+      /* ------------------------------------------------------------ */
+  
+      // Modern JSX transform – lets you omit `import React from "react"`
+      "jsx": "react-jsx",
+  
+      /* ------------------------------------------------------------ */
+      /*  Module resolution & paths                                   */
+      /* ------------------------------------------------------------ */
+  
+      // Resolve imports the same way Vite/Webpack does
+      "module": "ESNext",
+      "moduleResolution": "Node",
+  
+      // Allows absolute imports like `@/components/Button`
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      },
+  
+      /* ------------------------------------------------------------ */
+      /*  Misc                                                         */
+      /* ------------------------------------------------------------ */
+  
+      // Let JS files be type‑checked by the TS engine (optional but handy)
+      "allowJs": true,
+      // Allow `import something from "package"` even if package lacks typings
+      "allowSyntheticDefaultImports": true,
+      // Pick up JSON imports if you ever need them
+      "resolveJsonModule": true,
+      // Generate type‑checking errors for isolated files only
+      "isolatedModules": true,
+      // Target modern browsers used by Vite
+      "target": "ESNext"
+    },
+  
+    /* -------------------------------------------------------------- */
+    /*  What to include / exclude                                     */
+    /* -------------------------------------------------------------- */
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
+  
