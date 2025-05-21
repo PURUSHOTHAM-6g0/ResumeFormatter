@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import axios from "../api/axios"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import React, { useState } from "react";
+import axios from "../api/axios";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -10,49 +10,54 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { FileText, Home } from "lucide-react" // ✅ Add Home icon here
+} from "@/components/ui/card";
+import { FileText, Home } from "lucide-react";
+import { jwtDecode } from "jwt-decode"; // ✅ Fix import
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setSuccess("")
+    e.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (!username || !password) {
-      setError("Username and password are required")
-      return
+      setError("Username and password are required");
+      return;
     }
 
     try {
-      const res = await axios.post("/auth/login", { username, password })
-      localStorage.setItem("token", res.data.access_token)
-      setSuccess("Login successful! Redirecting...")
+      const res = await axios.post("/auth/login", { username, password });
+      const token = res.data.access_token;
+
+      localStorage.setItem("token", token);
+
+      // ✅ Decode username from token and store it
+      const decoded = jwtDecode(token);
+      localStorage.setItem("username", decoded.sub); // assuming 'sub' is the username
+
+      setSuccess("Login successful! Redirecting...");
       setTimeout(() => {
-        window.location.href = "/upload"
-      }, 1000)
+        window.location.href = "/upload";
+      }, 1000);
     } catch {
-      setError("Invalid username or password.")
+      setError("Invalid username or password.");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Navbar */}
       <header className="bg-black border-b border-gray-800">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
-          {/* Logo */}
           <a href="/" className="flex items-center gap-2 text-white">
             <FileText className="h-6 w-6 text-white" />
-            <span className="font-bold text-xl">FileManager</span>
+            <span className="font-bold text-xl">Resume Extractor</span>
           </a>
 
-          {/* Right buttons */}
           <div className="flex gap-2">
             <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
               <a href="/" className="flex items-center gap-1">
@@ -60,17 +65,13 @@ export default function LoginPage() {
                 Home
               </a>
             </Button>
-            <Button 
-              asChild
-              variant="outline"
-              className="text-white border-white hover:bg-white hover:text-black">
-            <a href="/register">Register</a>
+            <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
+              <a href="/register">Register</a>
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Main content */}
       <main className="flex-grow flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
           <CardHeader>
@@ -81,16 +82,8 @@ export default function LoginPage() {
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
-              {error && (
-                <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">
-                  {error}
-                </div>
-              )}
-              {success && (
-                <div className="bg-green-50 text-green-600 p-3 rounded-md text-sm">
-                  {success}
-                </div>
-              )}
+              {error && <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">{error}</div>}
+              {success && <div className="bg-green-50 text-green-600 p-3 rounded-md text-sm">{success}</div>}
               <div className="space-y-2">
                 <Label htmlFor="username">Username</Label>
                 <Input
@@ -112,10 +105,7 @@ export default function LoginPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button
-                type="submit"
-                className="w-full !bg-black !text-white hover:!bg-gray-900"
-              >
+              <Button type="submit" className="w-full !bg-black !text-white hover:!bg-gray-900">
                 Login
               </Button>
               <div className="text-center text-sm">
@@ -129,5 +119,5 @@ export default function LoginPage() {
         </Card>
       </main>
     </div>
-  )
+  );
 }

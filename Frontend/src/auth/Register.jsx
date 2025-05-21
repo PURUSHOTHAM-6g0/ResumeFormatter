@@ -58,7 +58,7 @@ export default function RegisterPage() {
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <a href="/" className="flex items-center gap-2 text-white">
             <FileText className="h-6 w-6 text-white" />
-            <span className="font-bold text-xl">FileManager</span>
+            <span className="font-bold text-xl">Resume Extractor</span>
           </a>
           <div className="flex gap-2">
             <Button

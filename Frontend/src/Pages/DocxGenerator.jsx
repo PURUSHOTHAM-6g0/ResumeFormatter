@@ -15,19 +15,22 @@ import {
   TabStopType, // Added import for tab stops
 } from "docx";
 import { saveAs } from "file-saver";
-
+ 
 // Add the trueBulletParagraph function
 export const trueBulletParagraph = (labelText, valueText, options = {}) => {
   const bulletColor = options.bulletColor || "000000"; // Default black bullet
   const labelColor = options.labelColor || bulletColor;
   const valueColor = options.valueColor || bulletColor;
-
+ 
   const labelBold = options.labelBold !== undefined ? options.labelBold : false;
   const valueBold = options.valueBold !== undefined ? options.valueBold : false;
-
+  const alignment = options.alignment || AlignmentType.LEFT;
+  const lineSpacing = options.lineSpacing || 240; // Default line spacing (1.0)
+ 
   return new Paragraph({
-    spacing: { after: 120 },
+    spacing: { after: 120, line: lineSpacing },
     indent: { left: 400, hanging: 200 },
+    alignment: alignment,
     tabStops: [{ type: TabStopType.LEFT, position: 400 }],
     children: [
       new TextRun({
@@ -53,20 +56,20 @@ export const trueBulletParagraph = (labelText, valueText, options = {}) => {
     ],
   });
 };
-
+ 
 export const generateResumeDocx = async (data) => {
   const doc = new Document({
     sections: createStyledSections(data),
   });
-
+ 
   const buffer = await Packer.toBlob(doc);
   saveAs(buffer, `${data.name || "resume"}.docx`);
 };
-
+ 
 const createStyledSections = (data) => {
   const leftContent = [];
   const rightContent = [];
-
+ 
   // === LEFT CONTENT ===
   if (Array.isArray(data.education) && data.education.length > 0) {
     leftContent.push(createSectionHeading("Education", "FFFFFF"));
@@ -75,11 +78,13 @@ const createStyledSections = (data) => {
         trueBulletParagraph("", edu, {
           bulletColor: "FFFFFF",
           valueColor: "FFFFFF",
+          lineSpacing: 276, // 1.15 line spacing
+          indent: { left: 300 },
         })
       );
     });
   }
-
+ 
   if (Array.isArray(data.skills) && data.skills.length > 0) {
     leftContent.push(createSectionHeading("Technical Expertise", "FFFFFF"));
     data.skills.forEach((skillGroup) => {
@@ -93,12 +98,13 @@ const createStyledSections = (data) => {
             labelColor: "FFFFFF",
             valueColor: "FFFFFF",
             labelBold: true,
+            lineSpacing: 276, // 1.15 line spacing
           }
         )
       );
     });
   }
-
+ 
   if (Array.isArray(data.certifications) && data.certifications.length > 0) {
     leftContent.push(createSectionHeading("Certifications", "FFFFFF"));
     data.certifications.forEach((cert) => {
@@ -106,11 +112,12 @@ const createStyledSections = (data) => {
         trueBulletParagraph("", cert, {
           bulletColor: "FFFFFF",
           valueColor: "FFFFFF",
+          lineSpacing: 276, // 1.15 line spacing
         })
       );
     });
   }
-
+ 
   // === RIGHT CONTENT ===
   if (
     Array.isArray(data.professional_experience) &&
@@ -124,11 +131,13 @@ const createStyledSections = (data) => {
         trueBulletParagraph("", item, {
           bulletColor: "000000",
           valueColor: "000000",
+          lineSpacing: 480, // 2.0 line spacing
+          alignment: AlignmentType.JUSTIFIED,
         })
       );
     });
   }
-
+ 
   if (Array.isArray(data.projects) && data.projects.length > 0) {
     rightContent.push(createSectionHeading("Projects", "000000"));
     data.projects.forEach((project) => {
@@ -136,6 +145,8 @@ const createStyledSections = (data) => {
         trueBulletParagraph("", project, {
           bulletColor: "000000",
           valueColor: "000000",
+          lineSpacing: 480, // 2.0 line spacing
+          alignment: AlignmentType.JUSTIFIED,
         })
       );
     });
@@ -143,10 +154,10 @@ const createStyledSections = (data) => {
   // 1. Original Base64 with prefix
   const ustLogoBase64 =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAABCCAYAAAAL1LXDAAAAAXNSR0IArs4c6QAAA7JJREFUaEPtW4111DAMliYANmgngE4ANwFlArgJoBPQm4DeBLQTlE5AmYAyAd2AbiDyBfle4vNfciZx3tnv3evrXWLpk+RPsuKwiJyQezwx85Pnt/ZrEXlORPjsDWZ+DN079jeV+YGIXhLRK0s+ZD4Q0R0z3zv1EpHfROQCfc/MqwjgayJ67wHMY0G57lPHfCYigE0ZAL9hZui4G7wEwCICT373RVMEPYCvTMQVD1g9+3MkWGOLHeglAPYtuZSw7l6DdX1eNGAROW/I6TYhZOFB8JCPgEFg70DCpQO+IqKPHsDb5vvLbibR8Aep4R6TPUBcl2aO0gGDqN4MzQIK/CsR3SyKpRvFvWlPmdeZa0NLoHQPfyKiLwEAMAi8mAy8dMBYh38S6BgVIUD/wN+GjVFtOUfRgKFxU0qGiMuHC6xtvN8rcYsHrKBReKDaGjrg+Stm3iyCpbvoRnraTHHNzGv8swgPG621EEGOdaaqiPvh6YsQ4AdmPgtNEkobTRhl3S1Z3kZ4o8B4PTDUVyHAj8x8GgE8qjAYuhAjOoDJ4XGUoTCAr7zENBsARq2Ki10D2ypnjovsYtA8eJEZ2ElKUyGy1u8AOET7yGcAvdf5EBEUBCgMXCPaPBhijGbPjiYD9OwxrmsOEYG3EXluvSIX4Ka2c6CtEwDH+okRx9quYYcAtNYruhy74l/1uHBFnrZ/ANaXwrYtsQS6HmP1PE0Jv4S1ieXmY2TTv/rVlJ/PFKTd47JFrA3glH1nKvjediz1Jvu6hMgbOnVLwrvUEdmZpE4eZfbUiTTyEMoI6RzjDDV2L1ceWM2A4NBVyNqeFRHkW4AOpZuQQcA70KvNNnvFwQgBmHDb7SrkcIdFXAALb8fybPe2Vi9l9l2W8VZDCvytWtZmPUMY2I6hTg027HMaQMtLEBka8aaPBfnmg0iDXt9ceiWXf0r5NCW4nIYycyUD/h/C55izAp7D6lPKrB6e0tpzyKoensPqU8qsHp7S2nPIqh6ew+pTyqwentLac8g6Pg9r72jMo4uQg9Dq6Z2PmsObLpnoS+fsGxkZWfvSOY1VAWeyZvVwJkMePM1RhnToBBu6lb5TNDd6jsJldTw99B4sOdhNB0wQzMORxx1ZHqkM1V0f08aa8l6DLxFw6LBaNC1WwN0QKzSkq4cdPOCtA2pI15D2HxCZKy3VNVzX8L8jxM53rpZIWt634bqe9h29WBzgoaWofX0FXHpaqh4eaIEa0sce0uh4+N79w2E0HOld1PgLGa5FbiKSBQEAAAAASUVORK5CYII=";
-
+ 
   // 2. Extract raw base64 (remove prefix)
   const base64String = ustLogoBase64.split(",")[1];
-
+ 
   // 3. Convert base64 to Uint8Array
   function base64ToUint8Array(base64) {
     const binaryString = atob(base64); // works in browser
@@ -157,9 +168,9 @@ const createStyledSections = (data) => {
     }
     return bytes;
   }
-
+ 
   const imageBytes = base64ToUint8Array(base64String);
-
+ 
   // 4. Now define your header table
   const headerTable = new Table({
     rows: [
@@ -221,7 +232,7 @@ const createStyledSections = (data) => {
       insideVertical: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
     },
   });
-
+ 
   // === TWO-COLUMN CONTENT TABLE ===
   const contentTable = new Table({
     rows: [
@@ -243,6 +254,10 @@ const createStyledSections = (data) => {
             width: { size: 35, type: WidthType.PERCENTAGE },
             shading: { fill: "166a6a" },
             children: leftContent,
+            margins: {
+              left: 300, // Add left padding (e.g., 300 twips = 0.25 inch)
+              right: 150, // optional right padding to keep text away from border
+            },
             borders: {
               top: BorderStyle.NONE,
               bottom: BorderStyle.NONE,
@@ -252,7 +267,7 @@ const createStyledSections = (data) => {
           }),
           // RIGHT CONTENT
           new TableCell({
-            width: { size: 60, type: WidthType.PERCENTAGE },
+            width: { size: 55, type: WidthType.PERCENTAGE },
             children: rightContent,
             margins: {
               top: 300,
@@ -290,9 +305,9 @@ const createStyledSections = (data) => {
       insideVertical: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
     },
   });
-
+ 
   const experienceDetail = [];
-
+ 
   if (Array.isArray(data.experience_data) && data.experience_data.length > 0) {
     experienceDetail.push(
       new Paragraph({
@@ -308,15 +323,15 @@ const createStyledSections = (data) => {
         ],
       })
     );
-
+ 
     // Sort experience_data
     const isInvalid = (resps) =>
       !Array.isArray(resps) || resps.length === 0 || resps === "Not available";
-
+ 
     const sortedExperiences = data.experience_data.slice().sort((a, b) => {
       return isInvalid(a.responsibilities) - isInvalid(b.responsibilities);
     });
-
+ 
     sortedExperiences.forEach((exp) => {
       experienceDetail.push(
         trueBulletParagraph("Company: ", exp.company, {
@@ -324,9 +339,11 @@ const createStyledSections = (data) => {
           labelColor: "000000",
           valueColor: "000000",
           labelBold: true,
+          lineSpacing: 276, // 2.0 line spacing
+          alignment: AlignmentType.JUSTIFIED,
         })
       );
-
+ 
       if (!(exp.role === "Not available")) {
         experienceDetail.push(
           trueBulletParagraph("Role: ", exp.role, {
@@ -334,10 +351,12 @@ const createStyledSections = (data) => {
             labelColor: "000000",
             valueColor: "000000",
             labelBold: true,
+            lineSpacing: 276, // 2.0 line spacing
+            alignment: AlignmentType.JUSTIFIED,
           })
         );
       }
-
+ 
       if (exp.startDate || exp.endDate) {
         experienceDetail.push(
           trueBulletParagraph(
@@ -348,11 +367,13 @@ const createStyledSections = (data) => {
               labelColor: "000000",
               valueColor: "000000",
               labelBold: true,
+              lineSpacing: 276, // 2.0 line spacing
+              alignment: AlignmentType.JUSTIFIED,
             }
           )
         );
       }
-
+ 
       if (!(exp.clientEngagement === "Not available")) {
         experienceDetail.push(
           trueBulletParagraph("Client Engagement: ", exp.clientEngagement, {
@@ -360,10 +381,12 @@ const createStyledSections = (data) => {
             labelColor: "000000",
             valueColor: "000000",
             labelBold: true,
+            lineSpacing: 276, // 2.0 line spacing
+            alignment: AlignmentType.JUSTIFIED,
           })
         );
       }
-
+ 
       if (!(exp.program === "Not available")) {
         experienceDetail.push(
           trueBulletParagraph("Program: ", exp.program, {
@@ -371,10 +394,12 @@ const createStyledSections = (data) => {
             labelColor: "000000",
             valueColor: "000000",
             labelBold: true,
+            lineSpacing: 276, // 2.0 line spacing
+            alignment: AlignmentType.JUSTIFIED,
           })
         );
       }
-
+ 
       if (
         Array.isArray(exp.responsibilities) &&
         exp.responsibilities.length > 0
@@ -385,25 +410,29 @@ const createStyledSections = (data) => {
             labelColor: "000000",
             valueColor: "000000",
             labelBold: true,
+            lineSpacing: 276, // 2.0 line spacing
+            alignment: AlignmentType.JUSTIFIED,
           })
         );
-
+ 
         exp.responsibilities.forEach((res) => {
           if (res?.trim()) {
             experienceDetail.push(
               trueBulletParagraph("", res, {
                 bulletColor: "000000",
                 valueColor: "000000",
+                lineSpacing: 276, // 2.0 line spacing
+                alignment: AlignmentType.JUSTIFIED,
               })
             );
           }
         });
       }
-
+ 
       experienceDetail.push(new Paragraph("")); // spacer
     });
   }
-
+ 
   return [
     {
       properties: {
@@ -433,7 +462,7 @@ const createStyledSections = (data) => {
     },
   ];
 };
-
+ 
 const createSectionHeading = (title, color = "000000") =>
   new Paragraph({
     spacing: { after: 150, before: 300 },
@@ -447,3 +476,4 @@ const createSectionHeading = (title, color = "000000") =>
       }),
     ],
   });
+ 

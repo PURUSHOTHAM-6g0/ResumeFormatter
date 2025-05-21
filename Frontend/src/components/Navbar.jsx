@@ -21,7 +21,7 @@ export default function Navbar() {
           onClick={() => navigate("/")}
         >
           <File className="w-6 h-6" />
-          FileManager
+          Resume Extractor
         </h1>
 
         <nav className="flex items-center gap-4 pr-2">

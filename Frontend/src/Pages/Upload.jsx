@@ -3,8 +3,8 @@ import Navbar from "@/components/navbar";
 import { FileUpload } from "@/components/file-upload";
 
 export default function UploadPage() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const username = user?.username || "";
+  // ✅ Correct way to parse and display username
+  const username = localStorage.getItem("username") || "";
 
   return (
     <div className="min-h-screen flex flex-col">

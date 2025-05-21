@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { FileText, Upload, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
@@ -10,7 +11,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl text-white">Resume Parser</span>
+            <span className="font-bold text-xl text-white">Resume Extractor</span>
           </div>
           <nav className="flex items-center gap-4">
             {/* Login button as ghost with white text */}
@@ -101,7 +102,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <FileText className="h-5 w-5 text-primary" />
-            <span className="font-semibold">Resume Parser</span>
+            <span className="font-semibold">Resume Extractor</span>
           </div>
           <p className="text-sm text-gray-500">© 2025 FileManager. All rights reserved.</p>
         </div>

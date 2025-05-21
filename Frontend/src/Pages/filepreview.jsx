@@ -51,7 +51,7 @@ export default function PreviewPage() {
             onClick={() => navigate("/upload")}
           >
             <FileOpenIcon className="h-6 w-6" />
-            <span className="font-bold text-xl">FileManager</span>
+            <span className="font-bold text-xl">Resume Extractor</span>
           </div>
 
           <div className="flex gap-2">
