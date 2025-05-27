@@ -11,8 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FileText, Home } from "lucide-react";
-import { jwtDecode } from "jwt-decode"; // ✅ Fix import
+import { FileText, Home , LogIn } from "lucide-react";
+import { jwtDecode } from "jwt-decode";
+import HomeIcon from "@mui/icons-material/Home" 
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -52,7 +53,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="bg-black border-b border-gray-800">
-        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+      <div className="w-full max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="/" className="flex items-center gap-2 text-white">
             <FileText className="h-6 w-6 text-white" />
             <span className="font-bold text-xl">Resume Extractor</span>
@@ -61,7 +62,7 @@ export default function LoginPage() {
           <div className="flex gap-2">
             <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-black">
               <a href="/" className="flex items-center gap-1">
-                <Home className="w-4 h-4" />
+              <HomeIcon className="w-5 h-5" />
                 Home
               </a>
             </Button>
@@ -105,9 +106,13 @@ export default function LoginPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <Button type="submit" className="w-full !bg-black !text-white hover:!bg-gray-900">
+            <Button
+              type="submit"
+              className="w-full !bg-black !text-white hover:!bg-gray-900 flex items-center justify-center gap-2">
+              <LogIn className="w-4 h-4" />
                 Login
-              </Button>
+            </Button>
+
               <div className="text-center text-sm">
                 Don't have an account?{" "}
                 <a href="/register" className="text-primary underline">

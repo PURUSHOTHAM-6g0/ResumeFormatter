@@ -8,7 +8,7 @@ export default function LandingPage() {
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="border-b bg-black">
-        <div className="container mx-auto px-4 flex h-16 items-center justify-between">
+      <div className="w-full max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
             <span className="font-bold text-xl text-white">Resume Extractor</span>

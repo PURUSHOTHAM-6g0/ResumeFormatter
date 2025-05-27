@@ -1376,3 +1376,556 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 2025-05-21 09:40:24,713 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
 2025-05-21 11:14:28,977 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
 2025-05-21 11:59:56,984 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 12:07:55,795 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 12:12:59,940 - resume - INFO - Register attempt for user: Teja
+2025-05-21 12:14:01,531 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 12:40:36,078 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 13:13:56,581 - resume - INFO - Server shutting down
+2025-05-21 13:14:00,317 - resume - INFO - Server started successfully
+2025-05-21 13:14:00,318 - resume - INFO - Server shutting down
+2025-05-21 13:14:02,693 - resume - INFO - Server started successfully
+2025-05-21 13:14:04,001 - resume - INFO - Server shutting down
+2025-05-21 13:14:07,049 - resume - INFO - Server started successfully
+2025-05-21 13:14:13,360 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-21 13:14:33,122 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 13:15:09,205 - resume - INFO - Server shutting down
+2025-05-21 13:15:12,369 - resume - INFO - Server started successfully
+2025-05-21 13:15:39,963 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 13:53:49,600 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-21 13:54:30,461 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:05:43,862 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:11:09,616 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:14:52,050 - resume - INFO - Register attempt for user: Purushotham
+2025-05-21 14:16:06,422 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:17:19,578 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:18:00,998 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 14:35:57,457 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 15:21:28,872 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 15:24:37,317 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 15:40:52,758 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:06:01,257 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:08:35,091 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:16:35,615 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:26:50,598 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:39:06,874 - resume - INFO - Server shutting down
+2025-05-21 16:39:13,983 - resume - INFO - Server started successfully
+2025-05-21 16:39:38,568 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-21 16:50:15,699 - resume - INFO - Server shutting down
+2025-05-21 16:50:18,617 - resume - INFO - Server started successfully
+2025-05-22 13:19:21,256 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-22 13:20:05,984 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:23:49,334 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:25:32,677 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:29:28,364 - resume - INFO - Server shutting down
+2025-05-22 13:29:35,354 - resume - INFO - Server started successfully
+2025-05-22 13:30:20,776 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:33:51,234 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:35:29,808 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-22 13:40:32,418 - resume - INFO - Server shutting down
+2025-05-22 13:40:35,636 - resume - INFO - Server started successfully
+2025-05-22 13:41:34,876 - resume - INFO - Server shutting down
+2025-05-22 13:41:40,627 - resume - INFO - Server started successfully
+2025-05-22 13:41:49,041 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-22 13:51:56,214 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 10:51:15,563 - resume - INFO - Server started successfully
+2025-05-23 10:51:35,855 - resume - INFO - Server shutting down
+2025-05-23 10:52:04,381 - resume - INFO - Server started successfully
+2025-05-23 10:52:04,386 - resume - INFO - Server shutting down
+2025-05-23 10:52:07,301 - resume - INFO - Server started successfully
+2025-05-23 10:52:28,146 - resume - INFO - Server shutting down
+2025-05-23 10:52:39,947 - resume - INFO - Server started successfully
+2025-05-23 10:52:50,879 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 10:56:44,486 - resume - INFO - Server shutting down
+2025-05-23 10:59:35,619 - resume - INFO - Server started successfully
+2025-05-23 11:00:13,169 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 11:02:26,605 - resume - INFO - Server shutting down
+2025-05-23 11:04:00,094 - resume - INFO - Server started successfully
+2025-05-23 11:04:53,997 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 11:07:33,437 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 11:09:36,037 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 11:14:32,310 - resume - INFO - Server shutting down
+2025-05-23 11:15:32,354 - resume - INFO - Server started successfully
+2025-05-23 12:20:03,696 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 12:37:10,221 - resume - INFO - Server shutting down
+2025-05-23 12:37:12,739 - resume - INFO - Server started successfully
+2025-05-23 12:37:54,436 - resume - INFO - Server shutting down
+2025-05-23 12:38:01,270 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:38:01,273 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:38:01,274 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:38:01,284 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:38:01,505 - resume - INFO - main.py:20 - startup_event() - Server started successfully
+2025-05-23 12:38:02,053 - resume - INFO - main.py:24 - shutdown_event() - Server shutting down
+2025-05-23 12:38:05,022 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:38:05,022 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:38:05,029 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:38:05,040 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:38:05,297 - resume - INFO - main.py:20 - startup_event() - Server started successfully
+2025-05-23 12:39:00,686 - resume - INFO - main.py:24 - shutdown_event() - Server shutting down
+2025-05-23 12:39:03,115 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:39:03,116 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:39:03,118 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:39:03,127 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:39:03,302 - resume - INFO - main.py:20 - startup_event() - Server started successfully
+2025-05-23 12:39:54,281 - resume - INFO - main.py:24 - shutdown_event() - Server shutting down
+2025-05-23 12:39:57,636 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:39:57,637 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:39:57,638 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:39:57,659 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:42:57,348 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:42:57,349 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:42:57,351 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:42:57,362 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:00,218 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:00,219 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:00,220 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:00,231 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:07,525 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:07,526 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:07,528 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:07,539 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:10,916 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:10,916 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:10,916 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:10,939 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:22,717 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:22,718 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:22,719 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:22,728 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:25,190 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:25,190 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:25,190 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:25,204 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:30,022 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:30,023 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:30,025 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:30,037 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:32,694 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:32,696 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:32,697 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:32,703 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:43:41,465 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:43:41,465 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:43:41,465 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:43:41,484 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:44:26,961 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:44:26,962 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:44:26,963 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:44:26,969 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:45:00,308 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-05-23 12:45:00,308 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-05-23 12:45:00,324 - passlib.utils.compat - DEBUG - __init__.py:449 - __getattr__() - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-05-23 12:45:00,335 - passlib.registry - DEBUG - registry.py:296 - register_crypt_handler() - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-05-23 12:45:00,506 - resume - INFO - main.py:20 - startup_event() - Server started successfully
+2025-05-23 13:08:53,458 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_part_begin with no data
+2025-05-23 13:08:53,459 - python_multipart.multipart - DEBUG - multipart.py:625 - callback() - Calling on_header_field with data[42:61]
+2025-05-23 13:08:53,460 - python_multipart.multipart - DEBUG - multipart.py:625 - callback() - Calling on_header_value with data[63:111]
+2025-05-23 13:08:53,460 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_header_end with no data
+2025-05-23 13:08:53,461 - python_multipart.multipart - DEBUG - multipart.py:625 - callback() - Calling on_header_field with data[113:125]
+2025-05-23 13:08:53,462 - python_multipart.multipart - DEBUG - multipart.py:625 - callback() - Calling on_header_value with data[127:198]
+2025-05-23 13:08:53,463 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_header_end with no data
+2025-05-23 13:08:53,464 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_headers_finished with no data
+2025-05-23 13:08:53,465 - python_multipart.multipart - DEBUG - multipart.py:625 - callback() - Calling on_part_data with data[202:26752]
+2025-05-23 13:08:53,466 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_part_end with no data
+2025-05-23 13:08:53,466 - python_multipart.multipart - DEBUG - multipart.py:628 - callback() - Calling on_end with no data
+2025-05-23 13:08:53,938 - httpcore.connection - DEBUG - _trace.py:47 - trace() - connect_tcp.started host='azure-openai-uk.openai.azure.com' port=443 local_address=None timeout=180.0 socket_options=None
+2025-05-23 13:08:54,053 - httpcore.connection - DEBUG - _trace.py:47 - trace() - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000013CC52ABB50>
+2025-05-23 13:08:54,055 - httpcore.connection - DEBUG - _trace.py:47 - trace() - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000013CC51A2DE0> server_hostname='azure-openai-uk.openai.azure.com' timeout=180.0
+2025-05-23 13:08:54,578 - httpcore.connection - DEBUG - _trace.py:47 - trace() - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000013CC524AAD0>
+2025-05-23 13:08:54,580 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - send_request_headers.started request=<Request [b'POST']>
+2025-05-23 13:08:54,581 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - send_request_headers.complete
+2025-05-23 13:08:54,582 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - send_request_body.started request=<Request [b'POST']>
+2025-05-23 13:08:54,583 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - send_request_body.complete
+2025-05-23 13:08:54,584 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - receive_response_headers.started request=<Request [b'POST']>
+2025-05-23 13:09:14,339 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Length', b'9928'), (b'Content-Type', b'application/json'), (b'apim-request-id', b'49f7c9de-db0c-4a61-a1c6-2ae9a7437f8a'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'x-content-type-options', b'nosniff'), (b'x-ms-region', b'UK South'), (b'x-ratelimit-remaining-requests', b'299990'), (b'x-ratelimit-limit-requests', b'300000'), (b'x-ratelimit-remaining-tokens', b'29814015'), (b'x-ratelimit-limit-tokens', b'30000000'), (b'azureml-model-session', b'd050-20250407134258'), (b'cmp-upstream-response-duration', b'19256'), (b'x-accel-buffering', b'no'), (b'x-request-id', b'2facb198-3614-43fa-a793-2a452e8a3cb7'), (b'x-ms-deployment-name', b'gpt-4o'), (b'Date', b'Fri, 23 May 2025 07:39:13 GMT')])
+2025-05-23 13:09:14,342 - httpx - INFO - _client.py:1025 - _send_single_request() - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:09:14,343 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - receive_response_body.started request=<Request [b'POST']>
+2025-05-23 13:09:14,344 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - receive_response_body.complete
+2025-05-23 13:09:14,345 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - response_closed.started
+2025-05-23 13:09:14,345 - httpcore.http11 - DEBUG - _trace.py:47 - trace() - response_closed.complete
+2025-05-23 13:09:14,346 - httpcore.connection - DEBUG - _trace.py:47 - trace() - close.started
+2025-05-23 13:09:14,347 - httpcore.connection - DEBUG - _trace.py:47 - trace() - close.complete
+2025-05-23 13:10:30,002 - resume - INFO - main.py:24 - shutdown_event() - Server shutting down
+2025-05-23 13:10:37,029 - resume - INFO - Server started successfully
+2025-05-23 13:10:40,811 - resume - INFO - Server shutting down
+2025-05-23 13:10:43,005 - resume - INFO - Server started successfully
+2025-05-23 13:11:33,207 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:34:30,188 - resume - INFO - Server shutting down
+2025-05-23 13:34:34,647 - resume - INFO - Server started successfully
+2025-05-23 13:35:05,505 - resume - INFO - Server shutting down
+2025-05-23 13:35:11,475 - resume - INFO - Server started successfully
+2025-05-23 13:35:11,909 - resume - INFO - Server shutting down
+2025-05-23 13:35:15,278 - resume - INFO - Server started successfully
+2025-05-23 13:35:36,178 - resume - INFO - Server shutting down
+2025-05-23 13:35:39,925 - resume - INFO - Server started successfully
+2025-05-23 13:35:54,721 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 13:36:25,288 - resume - INFO - Authenticated user: string
+2025-05-23 13:36:25,288 - resume - INFO - Resume upload by user: string, file: SabariMD.docx
+2025-05-23 13:36:25,299 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:36:25,485 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:36:39,601 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:36:39,607 - resume - INFO - Processing completed in 14.31 seconds. Overall confidence: 0.89
+2025-05-23 13:37:13,259 - resume - INFO - Authenticated user: string
+2025-05-23 13:37:13,263 - resume - INFO - Resume upload by user: string, file: SabariMD.docx
+2025-05-23 13:37:13,267 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:37:13,297 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:37:39,113 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:37:39,131 - resume - INFO - Processing completed in 25.86 seconds. Overall confidence: 0.89
+2025-05-23 13:39:03,666 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 13:39:03,666 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 13:39:03,673 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:39:03,722 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:39:17,456 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:39:17,462 - resume - INFO - Processing completed in 13.79 seconds. Overall confidence: 0.89
+2025-05-23 13:39:52,321 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 13:39:52,321 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Kamesh Resume.pdf
+2025-05-23 13:39:52,336 - resume - INFO - File size: 0.42 MB
+2025-05-23 13:39:52,507 - resume - INFO - Text extraction completed. Extracted 4730 characters.
+2025-05-23 13:40:15,539 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:40:15,547 - resume - INFO - Processing completed in 23.21 seconds. Overall confidence: 0.82
+2025-05-23 13:44:43,271 - resume - INFO - Server shutting down
+2025-05-23 13:44:47,438 - resume - INFO - Server started successfully
+2025-05-23 13:45:04,659 - resume - INFO - Server shutting down
+2025-05-23 13:45:08,539 - resume - INFO - Server started successfully
+2025-05-23 13:45:12,271 - resume - INFO - Authenticated user: string
+2025-05-23 13:45:12,271 - resume - INFO - Resume upload by user: string, file: SabariMD.docx
+2025-05-23 13:45:12,285 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:45:12,402 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:45:51,038 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:45:56,575 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:45:56,582 - resume - INFO - Processing completed in 44.30 seconds. Overall confidence: 0.96
+2025-05-23 13:46:34,404 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 13:46:34,404 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 13:46:34,411 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:46:34,470 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:47:07,783 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:47:13,421 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:47:13,428 - resume - INFO - Processing completed in 39.02 seconds. Overall confidence: 0.96
+2025-05-23 13:48:42,301 - resume - INFO - Authenticated user: string
+2025-05-23 13:53:40,046 - resume - INFO - Server shutting down
+2025-05-23 13:53:43,541 - resume - INFO - Server started successfully
+2025-05-23 13:53:48,341 - resume - INFO - Authenticated user: string
+2025-05-23 13:53:57,324 - resume - INFO - Authenticated user: string
+2025-05-23 13:53:57,324 - resume - INFO - Resume upload by user: string, file: SabariMD.docx
+2025-05-23 13:53:57,334 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:53:57,576 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:54:17,219 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:54:22,513 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:54:22,518 - resume - INFO - Processing completed in 25.18 seconds. Overall confidence: 0.96
+2025-05-23 13:54:54,914 - resume - INFO - Authenticated user: string
+2025-05-23 13:54:54,914 - resume - INFO - Resume upload by user: string, file: SabariMD.docx
+2025-05-23 13:54:54,921 - resume - INFO - File size: 0.03 MB
+2025-05-23 13:54:54,975 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 13:55:33,616 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:55:39,171 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:55:39,179 - resume - INFO - Processing completed in 44.26 seconds. Overall confidence: 0.96
+2025-05-23 13:56:42,750 - resume - INFO - Authenticated user: string
+2025-05-23 13:56:42,755 - resume - INFO - Resume upload by user: string, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 13:56:42,764 - resume - INFO - File size: 0.06 MB
+2025-05-23 13:56:42,919 - resume - INFO - Text extraction completed. Extracted 37117 characters.
+2025-05-23 13:56:57,909 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:57:06,061 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:57:06,067 - resume - INFO - Processing completed in 23.30 seconds. Overall confidence: 0.91
+2025-05-23 13:58:37,683 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 13:58:37,683 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 13:58:37,689 - resume - INFO - File size: 0.06 MB
+2025-05-23 13:58:37,858 - resume - INFO - Text extraction completed. Extracted 37117 characters.
+2025-05-23 13:58:57,168 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:59:03,706 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 13:59:03,721 - resume - INFO - Processing completed in 26.03 seconds. Overall confidence: 0.91
+2025-05-23 14:06:37,157 - resume - INFO - Server shutting down
+2025-05-23 14:06:40,106 - resume - INFO - Server started successfully
+2025-05-23 14:07:01,745 - resume - INFO - Server shutting down
+2025-05-23 14:07:04,718 - resume - INFO - Server started successfully
+2025-05-23 14:07:15,620 - resume - INFO - Server shutting down
+2025-05-23 14:07:19,183 - resume - INFO - Server started successfully
+2025-05-23 14:07:19,620 - resume - INFO - Server shutting down
+2025-05-23 14:07:22,704 - resume - INFO - Server started successfully
+2025-05-23 14:11:07,078 - resume - INFO - Server shutting down
+2025-05-23 14:23:06,421 - resume - INFO - Server started successfully
+2025-05-23 14:23:17,970 - resume - WARNING - Token expired
+2025-05-23 14:23:24,479 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 14:23:45,286 - resume - INFO - Authenticated user: string
+2025-05-23 14:23:45,293 - resume - INFO - Resume upload by user: string, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:23:45,299 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:23:45,658 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:23:45,658 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:23:45,662 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:24:06,653 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:24:12,192 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:24:12,201 - resume - INFO - Processing completed in 26.90 seconds. Overall confidence: 0.90
+2025-05-23 14:25:28,944 - resume - WARNING - Token expired
+2025-05-23 14:25:46,554 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:25:46,556 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:25:46,561 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:25:46,774 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:25:46,774 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:25:46,781 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:26:07,473 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:26:19,118 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:26:19,123 - resume - INFO - Processing completed in 32.56 seconds. Overall confidence: 0.90
+2025-05-23 14:30:27,097 - resume - INFO - Server shutting down
+2025-05-23 14:30:30,607 - resume - INFO - Server started successfully
+2025-05-23 14:31:04,112 - resume - INFO - Server shutting down
+2025-05-23 14:32:53,490 - resume - INFO - Server started successfully
+2025-05-23 14:32:53,534 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:32:53,536 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:32:53,549 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:32:54,074 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:32:54,075 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:32:54,076 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:33:10,643 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:33:16,169 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:33:16,187 - resume - INFO - Processing completed in 22.64 seconds. Overall confidence: 0.91
+2025-05-23 14:33:32,475 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 14:33:41,172 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:33:41,173 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:33:41,177 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:33:41,441 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:33:41,441 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:33:41,443 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:34:07,930 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:34:13,684 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:34:13,690 - resume - INFO - Processing completed in 32.51 seconds. Overall confidence: 0.90
+2025-05-23 14:37:19,444 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:37:19,444 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:37:19,456 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:37:19,673 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:37:19,673 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:37:19,673 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:37:47,564 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:37:54,294 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:37:54,308 - resume - INFO - Processing completed in 34.85 seconds. Overall confidence: 0.90
+2025-05-23 14:43:00,397 - resume - INFO - Server shutting down
+2025-05-23 14:43:04,472 - resume - INFO - Server started successfully
+2025-05-23 14:43:17,829 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:43:17,830 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:43:17,835 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:43:18,164 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:43:18,164 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:43:18,164 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:43:36,895 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:43:46,715 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:43:46,721 - resume - INFO - Processing completed in 28.89 seconds. Overall confidence: 0.93
+2025-05-23 14:46:42,675 - resume - INFO - Server shutting down
+2025-05-23 14:46:47,468 - resume - INFO - Server started successfully
+2025-05-23 14:56:08,040 - resume - INFO - Server shutting down
+2025-05-23 14:56:11,700 - resume - INFO - OCR (pytesseract) is available
+2025-05-23 14:56:32,297 - resume - INFO - OCR (pytesseract) is available
+2025-05-23 14:56:32,311 - resume - INFO - Server started successfully
+2025-05-23 14:56:56,459 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 14:56:56,459 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 14:56:56,476 - resume - INFO - File size: 0.06 MB
+2025-05-23 14:56:56,695 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 14:56:56,696 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 14:56:56,697 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 14:57:16,570 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:57:24,285 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 14:57:24,291 - resume - INFO - Processing completed in 27.82 seconds. Overall confidence: 0.90
+2025-05-23 15:18:35,664 - resume - INFO - Server shutting down
+2025-05-23 15:18:39,859 - resume - INFO - Server started successfully
+2025-05-23 15:19:03,057 - resume - WARNING - Token expired
+2025-05-23 15:19:12,134 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-23 15:19:21,132 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:19:21,132 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 15:19:21,143 - resume - INFO - File size: 0.06 MB
+2025-05-23 15:19:21,295 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 15:19:21,295 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 15:19:21,295 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 15:19:45,290 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:20:08,215 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:20:08,221 - resume - INFO - Processing completed in 47.08 seconds. Overall confidence: 0.92
+2025-05-23 15:27:51,625 - resume - INFO - Server shutting down
+2025-05-23 15:27:54,370 - resume - INFO - Server started successfully
+2025-05-23 15:28:05,540 - resume - INFO - Server shutting down
+2025-05-23 15:28:08,617 - resume - INFO - Server started successfully
+2025-05-23 15:28:26,756 - resume - INFO - Server shutting down
+2025-05-23 15:29:26,585 - resume - INFO - Server started successfully
+2025-05-23 15:29:26,605 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:29:26,607 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 15:29:26,615 - resume - INFO - File size: 0.06 MB
+2025-05-23 15:29:26,830 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 15:29:26,831 - resume - WARNING - Image text extraction failed: name 'extract_logos_and_certifications' is not defined
+2025-05-23 15:29:26,833 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 15:29:58,514 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:30:04,569 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:30:04,583 - resume - INFO - Processing completed in 37.97 seconds. Overall confidence: 0.91
+2025-05-23 15:30:30,632 - resume - INFO - Server shutting down
+2025-05-23 15:30:35,488 - resume - INFO - Server started successfully
+2025-05-23 15:30:45,844 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:30:45,844 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: Sakthivelu Vengatachalam_.Net architect.docx
+2025-05-23 15:30:45,848 - resume - INFO - File size: 0.06 MB
+2025-05-23 15:30:46,060 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 15:30:46,133 - resume - INFO - No text found in document images
+2025-05-23 15:30:46,133 - resume - INFO - Text extraction completed. Extracted 37117 characters and 0 image text blocks.
+2025-05-23 15:31:10,118 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:31:15,699 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:31:15,707 - resume - INFO - Processing completed in 29.86 seconds. Overall confidence: 0.90
+2025-05-23 15:34:44,817 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:34:44,817 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 15:34:44,817 - resume - INFO - File size: 0.03 MB
+2025-05-23 15:34:44,864 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 15:34:44,892 - resume - INFO - Successfully extracted text from 4 images
+2025-05-23 15:34:44,893 - resume - INFO - Image text 1: [HEADER TEXT - Confidence: 0.95: Sabari MD +44-745-901-4396 | +91 98956 61546		  sabarimd@gmail.com]...
+2025-05-23 15:34:44,894 - resume - INFO - Image text 2: [FOOTER TEXT - Confidence: 0.95: Sr Architect]...
+2025-05-23 15:34:44,895 - resume - INFO - Image text 3: [XML FOOTER TEXT - Confidence: 0.90: Sr Architect]...
+2025-05-23 15:34:44,895 - resume - INFO - Image text 4: [XML HEADER TEXT - Confidence: 0.90: Sabari MD +44-745-901-4396 | +91 98956 61546  sabarimd@gmail.co...
+2025-05-23 15:34:44,897 - resume - INFO - Text extraction completed. Extracted 13075 characters and 4 image text blocks.
+2025-05-23 15:35:09,293 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:35:14,672 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:35:14,684 - resume - INFO - Processing completed in 29.87 seconds. Overall confidence: 0.96
+2025-05-23 15:35:35,089 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:35:35,089 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 15:35:35,093 - resume - INFO - File size: 0.03 MB
+2025-05-23 15:35:35,139 - resume - INFO - Attempting to extract text from images in the document...
+2025-05-23 15:35:35,174 - resume - INFO - Successfully extracted text from 4 images
+2025-05-23 15:35:35,175 - resume - INFO - Image text 1: [HEADER TEXT - Confidence: 0.95: Sabari MD +44-745-901-4396 | +91 98956 61546		  sabarimd@gmail.com]...
+2025-05-23 15:35:35,176 - resume - INFO - Image text 2: [FOOTER TEXT - Confidence: 0.95: Sr Architect]...
+2025-05-23 15:35:35,178 - resume - INFO - Image text 3: [XML FOOTER TEXT - Confidence: 0.90: Sr Architect]...
+2025-05-23 15:35:35,179 - resume - INFO - Image text 4: [XML HEADER TEXT - Confidence: 0.90: Sabari MD +44-745-901-4396 | +91 98956 61546  sabarimd@gmail.co...
+2025-05-23 15:35:35,180 - resume - INFO - Text extraction completed. Extracted 13075 characters and 4 image text blocks.
+2025-05-23 15:35:57,271 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:36:02,167 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:36:02,177 - resume - INFO - Processing completed in 27.08 seconds. Overall confidence: 0.96
+2025-05-23 15:44:52,805 - resume - INFO - Server shutting down
+2025-05-23 15:44:57,146 - resume - INFO - Server started successfully
+2025-05-23 15:45:25,507 - resume - INFO - Server shutting down
+2025-05-23 15:45:29,489 - resume - INFO - Server started successfully
+2025-05-23 15:45:38,233 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:45:38,233 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 15:45:38,247 - resume - INFO - File size: 0.03 MB
+2025-05-23 15:45:38,466 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 15:45:58,314 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:46:03,310 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:46:03,317 - resume - INFO - Processing completed in 25.07 seconds. Overall confidence: 0.98
+2025-05-23 15:46:25,131 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:46:25,131 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 15:46:25,143 - resume - INFO - File size: 0.03 MB
+2025-05-23 15:46:25,191 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 15:46:49,888 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:46:55,832 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:46:55,851 - resume - INFO - Processing completed in 30.71 seconds. Overall confidence: 0.97
+2025-05-23 15:47:47,757 - resume - INFO - Authenticated user: PURUSHOTHAM
+2025-05-23 15:47:47,757 - resume - INFO - Resume upload by user: PURUSHOTHAM, file: SabariMD.docx
+2025-05-23 15:47:47,764 - resume - INFO - File size: 0.03 MB
+2025-05-23 15:47:47,823 - resume - INFO - Text extraction completed. Extracted 12975 characters.
+2025-05-23 15:48:31,918 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:48:35,748 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-23 15:48:35,754 - resume - INFO - Processing completed in 47.99 seconds. Overall confidence: 0.97
+2025-05-26 09:57:14,713 - resume - INFO - Server shutting down
+2025-05-26 09:57:20,436 - resume - INFO - Server started successfully
+2025-05-26 11:47:13,296 - resume - INFO - Server shutting down
+2025-05-26 11:47:16,051 - resume - INFO - Server started successfully
+2025-05-26 11:47:16,496 - resume - INFO - Server shutting down
+2025-05-26 11:47:18,861 - resume - INFO - Server started successfully
+2025-05-27 10:49:17,510 - resume - INFO - Server shutting down
+2025-05-27 11:07:46,508 - resume - INFO - Server started successfully
+2025-05-27 11:08:08,164 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-27 11:09:52,134 - resume - INFO - Server shutting down
+2025-05-27 11:09:56,112 - resume - INFO - Server started successfully
+2025-05-27 11:09:56,777 - resume - INFO - Server shutting down
+2025-05-27 11:09:59,700 - resume - INFO - Server started successfully
+2025-05-27 11:10:00,579 - resume - INFO - Server shutting down
+2025-05-27 11:10:04,293 - resume - INFO - Server started successfully
+2025-05-27 11:10:26,790 - resume - INFO - Server shutting down
+2025-05-27 11:10:30,182 - resume - INFO - Server started successfully
+2025-05-27 11:10:56,448 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:12:01,522 - resume - INFO - Server shutting down
+2025-05-27 11:12:05,709 - resume - INFO - Server started successfully
+2025-05-27 11:12:31,477 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:12:46,306 - resume - INFO - Server shutting down
+2025-05-27 11:12:50,323 - resume - INFO - Server started successfully
+2025-05-27 11:13:25,499 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:13:38,084 - resume - INFO - Server shutting down
+2025-05-27 11:13:41,587 - resume - INFO - Server started successfully
+2025-05-27 11:13:42,237 - resume - INFO - Server shutting down
+2025-05-27 11:13:46,701 - resume - INFO - Server started successfully
+2025-05-27 11:13:54,029 - resume - INFO - Server shutting down
+2025-05-27 11:14:07,187 - resume - INFO - Server started successfully
+2025-05-27 11:14:14,068 - resume - INFO - Server shutting down
+2025-05-27 11:22:03,288 - resume - INFO - Server started successfully
+2025-05-27 11:22:32,928 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:23:52,979 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\285071\Desktop\ResumeFormatter-main\ResumeFormatter-main\Backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-05-27 11:24:50,291 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:27:34,105 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:35:19,083 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:45:34,288 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:48:55,235 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:50:46,425 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:51:16,692 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 11:52:39,734 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:02:14,400 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:07:32,890 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:08:27,255 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:20:25,964 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:22:53,937 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:24:18,592 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:25:11,429 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:27:47,061 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:29:37,229 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:31:52,887 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 12:34:30,695 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 13:33:21,210 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 13:42:33,059 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 13:48:15,807 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 13:59:50,646 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2025-05-27 14:04:23,674 - httpx - INFO - HTTP Request: POST https://azure-openai-uk.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-10-21 "HTTP/1.1 200 OK"

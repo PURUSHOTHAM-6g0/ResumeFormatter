@@ -11,7 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { FileText, Home } from "lucide-react"
+import { FileText, Home ,UserPlus } from "lucide-react"
+import HomeIcon from "@mui/icons-material/Home"
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("")
@@ -55,7 +56,7 @@ export default function RegisterPage() {
     <div className="min-h-screen flex flex-col bg-background">
       {/* Navbar */}
       <header className="bg-black border-b border-gray-800">
-        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+      <div className="w-full max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="/" className="flex items-center gap-2 text-white">
             <FileText className="h-6 w-6 text-white" />
             <span className="font-bold text-xl">Resume Extractor</span>
@@ -67,7 +68,7 @@ export default function RegisterPage() {
               className="text-white border-white hover:bg-white hover:text-black"
             >
               <a href="/" className="flex items-center gap-1">
-                <Home className="w-4 h-4" />
+                <HomeIcon className="w-5 h-5" />
                 Home
               </a>
             </Button>
@@ -127,7 +128,7 @@ export default function RegisterPage() {
                 <Label htmlFor="confirm-password">Confirm Password</Label>
                 <Input
                   id="confirm-password"
-                  placeholder="Enter Password Again"
+                  placeholder="Confirm Password"
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -137,8 +138,9 @@ export default function RegisterPage() {
             <CardFooter className="flex flex-col space-y-4">
               <Button
                 type="submit"
-                className="w-full !bg-black !text-white hover:!bg-gray-900"
+                className="w-full !bg-black !text-white hover:!bg-gray-900 flex items-center justify-center gap-2"
               >
+                <UserPlus className="w-4 h-4" />
                 Register
               </Button>
               <div className="text-center text-sm">

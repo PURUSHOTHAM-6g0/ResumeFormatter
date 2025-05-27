@@ -45,7 +45,7 @@ export default function PreviewPage() {
     <div className="min-h-screen flex flex-col bg-background">
       {/* Navbar */}
       <header className="bg-black border-b border-gray-800">
-        <div className="container mx-auto flex h-16 items-center justify-between px-6">
+      <div className="w-full max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           <div
             className="flex items-center gap-2 text-white cursor-pointer select-none"
             onClick={() => navigate("/upload")}
