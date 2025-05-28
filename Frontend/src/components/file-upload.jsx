@@ -72,6 +72,7 @@ export function FileUpload() {
   const getStageMessage = (stage) => {
     const stageMessages = {
       upload: "File uploaded successfully",
+      processing: "Starting processing...",
       converting_docx_to_pdf: "Converting document to PDF...",
       conversion_to_image_all_pages: "Converting pages to images...",
       parsing_all_pages_with_vision: "Analyzing document with AI...",
@@ -79,6 +80,7 @@ export function FileUpload() {
       parsing: "Processing resume data...",
       completion: "Finalizing results...",
       completed: "Processing completed!",
+      failed: "Processing failed",
     }
     return stageMessages[stage] || "Processing..."
   }
@@ -110,16 +112,14 @@ export function FileUpload() {
 
         console.log("Progress data:", progressData) // Debug log
 
-        const currentPollCount = pollCount + 1
-        setPollCount(currentPollCount)
-
-        // Get backend progress or simulate based on stage and poll count
+        // Get backend progress directly
         let targetProgress = progressData.progress || 0
 
         // If backend doesn't provide progress, simulate based on stage
         if (!progressData.progress || progressData.progress === 0) {
           const stageProgress = {
             upload: 10,
+            processing: 15,
             converting_docx_to_pdf: 25,
             conversion_to_image_all_pages: 40,
             parsing_all_pages_with_vision: 70,
@@ -127,18 +127,14 @@ export function FileUpload() {
             parsing: 80,
             completion: 95,
             completed: 100,
+            failed: 0,
           }
 
-          targetProgress = stageProgress[progressData.stage] || Math.min(10 + currentPollCount * 5, 90)
+          targetProgress = stageProgress[progressData.stage] || 10
         }
 
-        // Smooth progress animation
-        if (targetProgress > uploadProgress) {
-          simulateProgress(uploadProgress, targetProgress, 1000)
-        } else {
-          setUploadProgress(targetProgress)
-        }
-
+        // Update progress immediately
+        setUploadProgress(targetProgress)
         setCurrentStage(progressData.stage || "processing")
 
         if (progressData.status === "completed" && progressData.data) {
@@ -171,8 +167,12 @@ export function FileUpload() {
       } catch (err) {
         console.error("Error polling progress:", err)
 
+        // Increment poll count for this specific call
+        const currentCount = pollCount + 1
+        setPollCount(currentCount)
+
         // If it's a network error, continue polling a few more times
-        if (pollCount < 10) {
+        if (currentCount < 10) {
           setTimeout(() => pollProgress(taskId), 2000)
           return
         }
@@ -185,7 +185,7 @@ export function FileUpload() {
         setPollCount(0)
       }
     },
-    [navigate, uploadProgress, pollCount],
+    [navigate], // Remove pollCount and uploadProgress from dependencies
   )
 
   const handleUpload = async () => {

@@ -11,10 +11,7 @@ export function Progress({ value = 0, className = "" }) {
       aria-valuemax={100}
       aria-label={`Progress: ${normalizedValue}%`}
     >
-      <div
-        className="bg-blue-600 h-full transition-all duration-300 ease-out"
-        style={{ width: `${normalizedValue}%` }}
-      />
+      <div className="bg-black h-full transition-all duration-300 ease-out" style={{ width: `${normalizedValue}%` }} />
     </div>
   )
 }

@@ -59,12 +59,37 @@ def extract_text_from_docx(file_path: str) -> str:
         raise RuntimeError(f"Failed to extract text from DOCX file: {str(e)}")
 
 def convert_docx_to_pdf(docx_path: str) -> str:
-    """Convert DOCX file to PDF and return the PDF file path"""
+    """Convert DOCX file to PDF using Aspose.Words first, then fallback to original methods"""
     try:
         # Create a temporary PDF file
         pdf_path = docx_path.replace('.docx', '.pdf').replace('.doc', '.pdf')
         
-        # Try different conversion methods based on the platform
+        # Try Aspose.Words first
+        try:
+            import aspose.words as aw
+            
+            print(f"Attempting conversion with Aspose.Words: {docx_path}")
+            
+            # Load the document
+            doc = aw.Document(docx_path)
+            
+            # Save as PDF with basic settings
+            doc.save(pdf_path)
+            
+            # Verify the PDF was created and has content
+            if os.path.exists(pdf_path) and os.path.getsize(pdf_path) > 0:
+                print(f"Successfully converted DOCX to PDF using Aspose.Words: {pdf_path}")
+                return pdf_path
+            else:
+                print("Aspose.Words created empty or invalid PDF, falling back")
+                raise Exception("Invalid PDF created")
+                
+        except ImportError:
+            print("Aspose.Words not installed, falling back to original methods")
+        except Exception as e:
+            print(f"Aspose.Words conversion failed: {str(e)}, falling back to original methods")
+        
+        # Fallback to original methods
         system = platform.system().lower()
         
         if system == "linux":
@@ -308,337 +333,3 @@ def clean_json_string(raw: str):
     # Remove triple backticks and language hint (```json)
     cleaned = re.sub(r"^```json\s*|\s*```$", "", raw.strip(), flags=re.MULTILINE)
     return json.loads(cleaned)
-
-
-
-
-
-
-
-# import PyPDF2
-# import httpx
-# import json
-# import re
-# import os
-# from app.config import AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY
-
-# def extract_text_from_pdf(file_path: str) -> str:
-#     """Extract text from PDF with multiple fallback methods"""
-#     try:
-#         # First try with PyPDF2
-#         with open(file_path, "rb") as file:
-#             reader = PyPDF2.PdfReader(file)
-#             text = ""
-#             for page_num in range(len(reader.pages)):
-#                 page = reader.pages[page_num]
-#                 text += page.extract_text() or ""
-#             return text
-#     except Exception as e:
-#         print(f"PyPDF2 failed: {str(e)}")
-        
-#         # Try with pdfplumber as fallback
-#         try:
-#             import pdfplumber
-#             text = ""
-#             with pdfplumber.open(file_path) as pdf:
-#                 for page in pdf.pages:
-#                     page_text = page.extract_text()
-#                     if page_text:
-#                         text += page_text + "\n"
-#             return text
-#         except ImportError:
-#             print("pdfplumber not available")
-#         except Exception as e:
-#             print(f"pdfplumber failed: {str(e)}")
-        
-#         # Try with pymupdf as another fallback
-#         try:
-#             import fitz  # pymupdf
-#             doc = fitz.open(file_path)
-#             text = ""
-#             for page in doc:
-#                 text += page.get_text()
-#             doc.close()
-#             return text
-#         except ImportError:
-#             print("pymupdf not available")
-#         except Exception as e:
-#             print(f"pymupdf failed: {str(e)}")
-        
-#         raise RuntimeError(f"All PDF extraction methods failed. Last error: {str(e)}")
-
-# def extract_text_from_docx(file_path: str) -> str:
-#     """Extract text directly from DOCX files"""
-#     try:
-#         from docx import Document
-#         doc = Document(file_path)
-#         text = []
-        
-#         # Extract text from paragraphs
-#         for paragraph in doc.paragraphs:
-#             if paragraph.text.strip():
-#                 text.append(paragraph.text)
-        
-#         # Extract text from tables
-#         for table in doc.tables:
-#             for row in table.rows:
-#                 for cell in row.cells:
-#                     if cell.text.strip():
-#                         text.append(cell.text)
-        
-#         return '\n'.join(text)
-#     except ImportError:
-#         raise RuntimeError("python-docx library not installed. Cannot process DOCX files directly.")
-#     except Exception as e:
-#         raise RuntimeError(f"Failed to extract text from DOCX: {str(e)}")
-
-# def extract_text_from_doc(file_path: str) -> str:
-#     """Extract text from DOC files using python-docx2txt"""
-#     try:
-#         import docx2txt
-#         text = docx2txt.process(file_path)
-#         return text if text else ""
-#     except ImportError:
-#         print("docx2txt not available for DOC files")
-#         raise RuntimeError("docx2txt library not installed. Cannot process DOC files directly.")
-#     except Exception as e:
-#         print(f"docx2txt failed: {str(e)}")
-#         raise RuntimeError(f"Failed to extract text from DOC: {str(e)}")
-
-# def optimize_text(text: str) -> str:
-#     """Optimize text to reduce size while preserving important information"""
-#     if not text:
-#         return ""
-    
-#     # Remove excessive whitespace
-#     text = re.sub(r'\s+', ' ', text)
-    
-#     # Remove duplicate lines (often happens in PDFs)
-#     lines = text.split('\n')
-#     unique_lines = []
-#     seen_lines = set()
-    
-#     for line in lines:
-#         line = line.strip()
-#         if line and line not in seen_lines:
-#             unique_lines.append(line)
-#             seen_lines.add(line)
-    
-#     return '\n'.join(unique_lines)
-
-# def extract_resume_details_with_azure(text: str) -> dict:
-#     """Process resume text with Azure OpenAI - returns both original format and reasoning/confidence"""
-#     if not text or len(text.strip()) < 10:
-#         raise RuntimeError("No meaningful text extracted from the document")
-    
-#     url = AZURE_OPENAI_ENDPOINT
-#     headers = {
-#         "Content-Type": "application/json",
-#         "api-key": AZURE_OPENAI_KEY
-#     }
-
-#     # First call - Original format for frontend compatibility
-#     original_system_prompt = (
-#         "You are an expert resume parser. Extract the following fields from the resume:\n"
-#         "- name\n"
-#         "- email\n"
-#         "- mobile\n"
-#         "- skills (group related skills together, and return as a list of objects with category as the key and related skills as the value. For example: [{ 'Programming Languages': ['Java', 'C++'] }, { 'Cloud': ['AWS', 'Docker'] }])\n"
-#         "- education (as a list of degrees/institutions)\n"
-#         "- professional_experience ( Try to get the entire resume summary. Note that it should be in format 'professional_experience':['point1','point2',..])\n"
-#         "- certifications (as a list)\n"
-#         "- experience_data (as a list of objects with each object containing the following keys: 'company', 'startDate', 'endDate', 'role', 'clientEngagement', 'program', and 'responsibilities' which is a list of bullet points describing duties)\n"
-#         "Return the data as valid JSON. If there is no data available for a section, try to infer it from the resume. If not possible, return 'Not available' for that section."
-#     )
-
-#     # Second call - Enhanced format with reasoning and confidence
-#     enhanced_system_prompt = (
-#         "You are an expert resume parser. For each field you extract, provide reasoning and confidence:\n"
-#         "- name\n"
-#         "- email\n"
-#         "- mobile\n"
-#         "- skills\n"
-#         "- education\n"
-#         "- professional_experience\n"
-#         "- certifications\n"
-#         "- experience_data\n\n"
-        
-#         "For EACH field, provide:\n"
-#         "1. A 'reasoning' explaining HOW and WHY you identified this information\n"
-#         "2. A 'confidence' score between 0.0 and 1.0\n\n"
-        
-#         "Return in this format:\n"
-#         "{\n"
-#         "  \"name\": {\n"
-#         "    \"reasoning\": \"explanation\",\n"
-#         "    \"confidence\": 0.95\n"
-#         "  },\n"
-#         "  \"email\": {\n"
-#         "    \"reasoning\": \"explanation\",\n"
-#         "    \"confidence\": 0.98\n"
-#         "  }\n"
-#         "  // ... for all fields\n"
-#         "}"
-#     )
-
-#     # Optimize text to reduce size while preserving content
-#     optimized_text = optimize_text(text)
-#     print(f"Original text length: {len(text)}, Optimized text length: {len(optimized_text)}")
-    
-#     user_prompt = f"Resume Text:\n{optimized_text}"
-
-#     # First API call - Original format
-#     original_payload = {
-#         "messages": [
-#             {"role": "system", "content": original_system_prompt},
-#             {"role": "user", "content": user_prompt}
-#         ],
-#         "temperature": 0.2,
-#         "max_tokens": 4000
-#     }
-
-#     # Second API call - Reasoning and confidence
-#     enhanced_payload = {
-#         "messages": [
-#             {"role": "system", "content": enhanced_system_prompt},
-#             {"role": "user", "content": user_prompt}
-#         ],
-#         "temperature": 0.2,
-#         "max_tokens": 4000
-#     }
-
-#     try:
-#         # Create a client with increased timeout for large documents
-#         with httpx.Client(timeout=180.0) as client:
-#             # First call - Original data
-#             print("Making first API call for original data extraction...")
-#             response1 = client.post(url, headers=headers, json=original_payload)
-#             response1.raise_for_status()
-            
-#             # Second call - Reasoning and confidence
-#             print("Making second API call for reasoning and confidence...")
-#             response2 = client.post(url, headers=headers, json=enhanced_payload)
-#             response2.raise_for_status()
-            
-#         try:
-#             # Parse original data
-#             original_data = response1.json()
-#             original_result = original_data["choices"][0]["message"]["content"]
-            
-#             # Parse reasoning and confidence data
-#             enhanced_data = response2.json()
-#             enhanced_result = enhanced_data["choices"][0]["message"]["content"]
-            
-#             print("Both Azure OpenAI calls completed successfully")
-            
-#             return {
-#                 "original": original_result,
-#                 "enhanced": enhanced_result
-#             }
-            
-#         except Exception as json_error:
-#             print("Raw response text:", response1.text if 'response1' in locals() else "No response1")
-#             raise RuntimeError(f"Failed to parse JSON: {json_error}")
-#     except httpx.HTTPStatusError as e:
-#         print("Azure returned an HTTP error:", e.response.text)
-#         raise RuntimeError(f"Request failed with status {e.response.status_code}: {e.response.text}")
-#     except httpx.ReadTimeout:
-#         raise RuntimeError("Request timed out. The document may be too large or complex.")
-#     except Exception as e:
-#         print(f"Unexpected error in Azure API call: {str(e)}")
-#         raise RuntimeError(f"Failed to process with Azure API: {str(e)}")
-
-# def clean_json_string(raw: str):
-#     """Clean and parse JSON string from API response"""
-#     if not raw:
-#         raise ValueError("Empty response from API")
-    
-#     # Remove triple backticks and language hint (```json)
-#     cleaned = re.sub(r"^```json\s*|\s*```$", "", raw.strip(), flags=re.MULTILINE)
-    
-#     try:
-#         return json.loads(cleaned)
-#     except json.JSONDecodeError as e:
-#         print(f"Initial JSON parsing failed: {str(e)}")
-        
-#         # Try additional cleaning if initial parsing fails
-#         cleaned = re.sub(r'[\n\r\t]', ' ', cleaned)
-        
-#         # Remove any non-JSON content before or after the JSON object
-#         match = re.search(r'(\{.*\})', cleaned, re.DOTALL)
-#         if match:
-#             cleaned = match.group(1)
-#             try:
-#                 return json.loads(cleaned)
-#             except json.JSONDecodeError:
-#                 pass
-        
-#         # Last resort: try to fix common JSON issues
-#         cleaned = re.sub(r',\s*}', '}', cleaned)  # Remove trailing commas
-#         cleaned = re.sub(r',\s*]', ']', cleaned)  # Remove trailing commas in arrays
-        
-#         try:
-#             return json.loads(cleaned)
-#         except json.JSONDecodeError as final_error:
-#             print(f"Final JSON parsing failed. Raw content: {raw[:500]}...")
-#             raise ValueError(f"Could not parse JSON response: {str(final_error)}")
-
-# def process_azure_response(azure_response: dict):
-#     """Process the dual Azure response to separate original data and reasoning/confidence"""
-#     try:
-#         # Parse original data (for frontend)
-#         original_data = clean_json_string(azure_response["original"])
-        
-#         # Parse enhanced data (reasoning and confidence)
-#         try:
-#             enhanced_data = clean_json_string(azure_response["enhanced"])
-#         except Exception as e:
-#             print(f"Failed to parse enhanced data: {str(e)}")
-#             enhanced_data = {}
-        
-#         # Calculate overall confidence
-#         confidence_scores = []
-#         for field_name, field_info in enhanced_data.items():
-#             if isinstance(field_info, dict) and "confidence" in field_info:
-#                 confidence_scores.append(field_info["confidence"])
-        
-#         overall_confidence = sum(confidence_scores) / len(confidence_scores) if confidence_scores else 0
-        
-#         # Log confidence information
-#         print("\n=== EXTRACTION ANALYSIS ===")
-#         for field_name, field_info in enhanced_data.items():
-#             if isinstance(field_info, dict):
-#                 confidence = field_info.get("confidence", 0)
-#                 reasoning = field_info.get("reasoning", "No reasoning provided")
-#                 print(f"{field_name}: Confidence {confidence:.2f}")
-#                 if confidence < 0.7:
-#                     print(f"  ⚠️  LOW CONFIDENCE - {reasoning}")
-        
-#         print(f"Overall Confidence: {overall_confidence:.2f}")
-#         print("===========================\n")
-        
-#         return {
-#             "parsed_data": original_data,  # Original format for frontend
-#             "analysis": {
-#                 "reasoning_and_confidence": enhanced_data,
-#                 "overall_confidence": overall_confidence,
-#                 "field_count": len(confidence_scores)
-#             }
-#         }
-        
-#     except Exception as e:
-#         print(f"Error processing Azure response: {str(e)}")
-#         # Fallback to original data only
-#         try:
-#             original_data = clean_json_string(azure_response["original"])
-#             return {
-#                 "parsed_data": original_data,
-#                 "analysis": {
-#                     "reasoning_and_confidence": {},
-#                     "overall_confidence": 0,
-#                     "field_count": 0,
-#                     "error": "Failed to extract reasoning and confidence"
-#                 }
-#             }
-#         except:
-#             raise ValueError("Failed to process any Azure response data")
