@@ -73,8 +73,8 @@ export function FileUpload() {
     const stageMessages = {
       upload: "File uploaded successfully",
       processing: "Starting processing...",
-      converting_docx_to_pdf: "Converting document to PDF...",
-      conversion_to_image_all_pages: "Converting pages to images...",
+      converting_docx_to_pdf: "Converting pages to images...",
+      conversion_to_image_all_pages: "Completed Converting pages to images...",
       parsing_all_pages_with_vision: "Analyzing document with AI...",
       extraction: "Extracting text from document...",
       parsing: "Processing resume data...",

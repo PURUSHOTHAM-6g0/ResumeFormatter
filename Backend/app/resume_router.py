@@ -1,3 +1,4 @@
+from auth.auth import JWTBearer
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, BackgroundTasks
 from sqlalchemy.orm import Session
 from sqlalchemy import Column, Integer, String, DateTime, Text, JSON, inspect
@@ -35,7 +36,7 @@ def column_exists(table_name, column_name):
 # Flag to track if processing_method column exists
 HAS_PROCESSING_METHOD_COLUMN = column_exists('resume_history', 'processing_method')
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(JWTBearer())])
 
 # In-memory task storage (replace with Redis or DB in production)
 TASKS = {}

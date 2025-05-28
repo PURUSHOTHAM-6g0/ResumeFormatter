@@ -5,8 +5,8 @@ import json
 import re
 import tempfile
 import os
-import base64  # For encoding images
-import fitz  # PyMuPDF
+import base64  
+import fitz  
 from PIL import Image
 import io
 from docx import Document  # For DOCX text extraction
