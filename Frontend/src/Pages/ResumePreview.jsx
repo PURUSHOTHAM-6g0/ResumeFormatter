@@ -1,12 +1,15 @@
 import { Document, Page, Text, View, StyleSheet, Font, Image } from "@react-pdf/renderer"
-
 import ProfessionalExperiencePage from "./ProfessionalExperience"
 
-// Font registration
-Font.register({
-  family: "Helvetica",
-  src: "https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf",
-})
+// Font registration with error handling
+try {
+  Font.register({
+    family: "Helvetica",
+    src: "https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf",
+  })
+} catch (error) {
+  console.warn("Font registration failed:", error)
+}
 
 const styles = StyleSheet.create({
   page: {
@@ -51,6 +54,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     flex: 1,
+    minHeight: 650,
+    maxHeight: 650,
   },
   leftPanel: {
     backgroundColor: "#166a6a",
@@ -65,6 +70,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: "40%",
     minHeight: "100%",
+    maxHeight: 650,
+    overflow: "hidden",
   },
   rightPanel: {
     paddingTop: 20,
@@ -77,6 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     minHeight: "100%",
+    maxHeight: 650,
+    overflow: "hidden",
   },
   leftPanelContent: {
     paddingBottom: 20,
@@ -87,13 +96,14 @@ const styles = StyleSheet.create({
   sectionHeading: {
     fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 12,
+    color: "white",
   },
   h2: {
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 0,
-    marginBottom: 10,
+    marginBottom: 12,
   },
   listItem: {
     flexDirection: "row",
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     position: "relative",
     fontSize: 11,
-    lineHeight: 1.15, // Changed from 1.4 to 1.15
+    lineHeight: 1.15,
   },
   squareBullet: {
     position: "absolute",
@@ -124,150 +134,241 @@ const styles = StyleSheet.create({
   listItemText: {
     flex: 1,
     textAlign: "justify",
-    lineHeight: 1.15, // Changed from default to 1.15
+    lineHeight: 1.15,
   },
   leftPanelListItem: {
     flexDirection: "row",
-    marginBottom: 4, // Reduced from 5 to 4
+    marginBottom: 8,
     paddingLeft: 20,
     position: "relative",
     fontSize: 11,
-    lineHeight: 1.15, // Changed from 1.4 to 1.15
+    lineHeight: 1.2,
   },
   skillContainer: {
-    marginBottom: 8, // Reduced from 10 to 8
+    marginBottom: 10,
   },
   skillLine: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     fontSize: 11,
     color: "#fff",
-    lineHeight: 1.15, // Added 1.15 line height
+    lineHeight: 1.2,
+    flexWrap: "wrap",
+  },
+  skillCategory: {
+    fontWeight: "bold",
+    color: "#fff",
   },
   skillText: {
     fontWeight: "normal",
-    lineHeight: 1.15, // Added 1.15 line height
+    color: "#fff",
   },
   sectionWrapper: {
-    marginBottom: 15, // Reduced from 20 to 15
+    marginBottom: 20,
     orphans: 2,
     widows: 2,
   },
   experienceWrapper: {
     break: false,
-    marginBottom: 10, // Reduced from 15 to 10
+    marginBottom: 10,
+  },
+  certificationItem: {
+    flexDirection: "row",
+    marginBottom: 8,
+    paddingLeft: 20,
+    position: "relative",
+    fontSize: 11,
+    lineHeight: 1.2,
+  },
+  errorContainer: {
+    padding: 40,
+    textAlign: "center",
+    color: "red",
+  },
+  errorText: {
+    fontSize: 16,
+    marginBottom: 10,
   },
 })
+
+// Safe text rendering function with comprehensive error handling
+const SafeText = ({ children, style = {} }) => {
+  try {
+    if (children === null || children === undefined) {
+      return <Text style={style}></Text>
+    }
+
+    const safeText = String(children).trim()
+    return <Text style={style}>{safeText}</Text>
+  } catch (error) {
+    console.error("SafeText error:", error)
+    return <Text style={style}>Error rendering text</Text>
+  }
+}
+
+// Safe View component
+const SafeView = ({ children, style = {} }) => {
+  try {
+    return <View style={style}>{children}</View>
+  } catch (error) {
+    console.error("SafeView error:", error)
+    return (
+      <View style={style}>
+        <Text>Error rendering content</Text>
+      </View>
+    )
+  }
+}
 
 const ResumePDF = ({ data }) => {
   const ustLogoBase64 =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAABCCAYAAAAL1LXDAAAAAXNSR0IArs4c6QAAA7JJREFUaEPtW4111DAMliYANmgngE4ANwFlArgJoBPQm4DeBLQTlE5AmYAyAd2AbiDyBfle4vNfciZx3tnv3evrXWLpk+RPsuKwiJyQezwx85Pnt/ZrEXlORPjsDWZ+DN079jeV+YGIXhLRK0s+ZD4Q0R0z3zv1EpHfROQCfc/MqwjgayJ67wHMY0G57lPHfCYigE0ZAL9hZui4G7wEwCICT373RVMEPYCvTMQVD1g9+3MkWGOLHeglAPYtuZSw7l6DdX1eNGAROW/I6TYhZOFB8JCPgEFg70DCpQO+IqKPHsDb5vvLbibR8Aep4R6TPUBcl2aO0gGDqN4MzQIK/CsR3SyKpRvFvWlPmdeZa0NLoHQPfyKiLwEAMAi8mAy8dMBYh38S6BgVIUD/wN+GjVFtOUfRgKFxU0qGiMuHC6xtvN8rcYsHrKBReKDaGjrg+Stm3iyCpbvoRnraTHHNzGv8swgPG621EEGOdaaqiPvh6YsQ4AdmPgtNEkobTRhl3S1Z3kZ4o8B4PTDUVyHAj8x8GgE8qjAYuhAjOoDJ4XGUoTCAr7zENBsARq2Ki10D2ypnjovsYtA8eJEZ2ElKUyGy1u8AOET7yGcAvdf5EBEUBCgMXCPaPBhijGbPjiYD9OwxrmsOEYG3EXluvSIX4Ka2c6CtEwDH+okRx9quYYcAtNYruhy74l/1uHBFnrZ/ANaXwrYtsQS6HmP1PE0Jv4S1ieXmY2TTv/rVlJ/PFKTd47JFrA3glH1nKvjediz1Jvu6hMgbOnVLwrvUEdmZpE4eZfbUiTTyEMoI6RzjDDV2L1ceWM2A4NBVyNqeFRHkW4AOpZuQQcA70KvNNnvFwQgBmHDb7SrkcIdFXAALb8fybPe2Vi9l9l2W8VZDCvytWtZmPUMY2I6hTg027HMaQMtLEBka8aaPBfnmg0iDXt9ceiWXf0r5NCW4nIYycyUD/h/C55izAp7D6lPKrB6e0tpzyKoensPqU8qsHp7S2nPIqh6ew+pTyqwentLac8g6Pg9r72jMo4uQg9Dq6Z2PmsObLpnoS+fsGxkZWfvSOY1VAWeyZvVwJkMePM1RhnToBBu6lb5TNDd6jsJldTw99B4sOdhNB0wQzMORxx1ZHqkM1V0f08aa8l6DLxFw6LBaNC1WwN0QKzSkq4cdPOCtA2pI15D2HxCZKy3VNVzX8L8jxM53rpZIWt634bqe9h29WBzgoaWofX0FXHpaqh4eaIEa0sce0uh4+N79w2E0HOld1PgLGa5FbiKSBQEAAAAASUVORK5CYII="
 
-  return (
-    <Document>
-      <Page size="A4" style={styles.page} wrap>
-        <View style={styles.container}>
-          {/* Header */}
-          <View style={styles.header}>
-            <View style={styles.logoContainer}>
-              <Image src={ustLogoBase64 || "/placeholder.svg"} style={styles.logo} />
-            </View>
-            <Text style={styles.name}>{data.name}</Text>
-          </View>
+  // Comprehensive data validation with error boundaries
+  if (!data || typeof data !== "object") {
+    console.error("Invalid data passed to ResumePDF:", data)
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <SafeView style={styles.errorContainer}>
+            <SafeText style={styles.errorText}>Error: Invalid Resume Data</SafeText>
+            <SafeText>Please try uploading your resume again.</SafeText>
+          </SafeView>
+        </Page>
+      </Document>
+    )
+  }
 
-          {/* CONTENT: two-column layout */}
-          <View style={styles.columnsContainer}>
-            {/* Left Column */}
-            <View style={styles.leftPanel}>
-              <View style={styles.leftPanelContent}>
-                {/* Education - Fixed to handle single string */}
-                {data.education && data.education !== "Not available" && (
-                  <View style={styles.sectionWrapper}>
-                    <Text style={styles.sectionHeading}>Education</Text>
-                    <View style={styles.leftPanelListItem}>
-                      <View style={styles.leftPanelSquareBullet} />
-                      <Text style={styles.listItemText}>
-                        {Array.isArray(data.education) ? data.education.join(", ") : data.education}
-                      </Text>
-                    </View>
-                  </View>
-                )}
+  try {
+    // Safely get name with fallback
+    const safeName = (data.name && typeof data.name === "string" && data.name.trim()) || "Unknown"
 
-                {/* Skills */}
-                {Array.isArray(data.skills) && data.skills.length > 0 && (
-                  <View style={styles.sectionWrapper}>
-                    <Text style={styles.sectionHeading}>Technical Expertise</Text>
-                    {data.skills.map((group, i) => {
-                      const [category, skills] = Object.entries(group)[0]
-                      return (
-                        <View key={i} style={styles.skillContainer}>
-                          <View style={styles.leftPanelListItem}>
-                            <View style={styles.leftPanelSquareBullet} />
-                            <Text style={styles.skillLine}>
-                              <Text>{category}: </Text>
-                              <Text style={styles.skillText}>{Array.isArray(skills) ? skills.join(", ") : skills}</Text>
-                            </Text>
-                          </View>
-                        </View>
-                      )
-                    })}
-                  </View>
-                )}
+    return (
+      <Document>
+        <Page size="A4" style={styles.page} wrap>
+          <SafeView style={styles.container}>
+            {/* Header */}
+            <SafeView style={styles.header}>
+              <SafeView style={styles.logoContainer}>
+                <Image src={ustLogoBase64 || "/placeholder.svg"} style={styles.logo} />
+              </SafeView>
+              <SafeText style={styles.name}>{safeName}</SafeText>
+            </SafeView>
 
-                {/* Certifications */}
-                {Array.isArray(data.certifications) &&
-                  data.certifications.length > 0 &&
-                  !data.certifications.includes("Not available") && (
-                    <View style={styles.sectionWrapper}>
-                      <Text style={styles.sectionHeading}>Certifications</Text>
-                      {data.certifications.map((certificate, i) => (
-                        <View key={i} style={styles.leftPanelListItem}>
-                          <View style={styles.leftPanelSquareBullet} />
-                          <Text style={styles.listItemText}>{certificate}</Text>
-                        </View>
-                      ))}
-                    </View>
+            {/* CONTENT: two-column layout with fixed height */}
+            <SafeView style={styles.columnsContainer}>
+              {/* Left Column */}
+              <SafeView style={styles.leftPanel}>
+                <SafeView style={styles.leftPanelContent}>
+                  {/* Technical Expertise */}
+                  {Array.isArray(data.skills) && data.skills.length > 0 && (
+                    <SafeView style={styles.sectionWrapper}>
+                      <SafeText style={styles.sectionHeading}>Technical Expertise</SafeText>
+                      {data.skills.map((group, i) => {
+                        try {
+                          if (!group || typeof group !== "object") return null
+                          const entries = Object.entries(group)
+                          if (entries.length === 0) return null
+                          const [category, skills] = entries[0]
+                          if (!category || !skills) return null
+
+                          return (
+                            <SafeView key={`skill-${i}`} style={styles.skillContainer}>
+                              <SafeView style={styles.leftPanelListItem}>
+                                <SafeView style={styles.leftPanelSquareBullet} />
+                                <SafeView style={{ flex: 1 }}>
+                                  <Text style={styles.skillLine}>
+                                    <Text style={styles.skillCategory}>{category}: </Text>
+                                    <Text style={styles.skillText}>
+                                      {Array.isArray(skills) ? skills.join(", ") : String(skills || "")}
+                                    </Text>
+                                  </Text>
+                                </SafeView>
+                              </SafeView>
+                            </SafeView>
+                          )
+                        } catch (error) {
+                          console.error("Error rendering skill:", error)
+                          return null
+                        }
+                      })}
+                    </SafeView>
                   )}
 
-                {/* Summary */}
-                {data.summary && data.summary !== "Not available" && (
-                  <View style={styles.sectionWrapper}>
-                    <Text style={styles.sectionHeading}>Summary</Text>
-                    <View style={styles.leftPanelListItem}>
-                      <View style={styles.leftPanelSquareBullet} />
-                      <Text style={styles.listItemText}>{data.summary}</Text>
-                    </View>
-                  </View>
-                )}
-              </View>
-            </View>
+                  {/* Certifications */}
+                  {Array.isArray(data.certifications) && data.certifications.length > 0 && (
+                    <SafeView style={styles.sectionWrapper}>
+                      <SafeText style={styles.sectionHeading}>Certifications</SafeText>
+                      {data.certifications.map((certificate, i) => {
+                        try {
+                          if (!certificate || typeof certificate !== "string") return null
+                          return (
+                            <SafeView key={`cert-${i}`} style={styles.certificationItem}>
+                              <SafeView style={styles.leftPanelSquareBullet} />
+                              <SafeView style={{ flex: 1 }}>
+                                <SafeText style={styles.skillText}>{certificate}</SafeText>
+                              </SafeView>
+                            </SafeView>
+                          )
+                        } catch (error) {
+                          console.error("Error rendering certification:", error)
+                          return null
+                        }
+                      })}
+                    </SafeView>
+                  )}
+                </SafeView>
+              </SafeView>
 
-            {/* Right Column */}
-            <View style={styles.rightPanel}>
-              <View style={styles.rightPanelContent}>
-                <Text style={styles.h2}>Professional Experience</Text>
-                {Array.isArray(data.professional_experience) &&
-                  data.professional_experience.map((exp, i) => (
-                    <View key={i} style={styles.experienceWrapper}>
-                      <View style={styles.listItem}>
-                        <View style={styles.squareBullet} />
-                        <Text style={styles.listItemText}>{exp}</Text>
-                      </View>
-                    </View>
-                  ))}
-              </View>
-            </View>
-          </View>
-        </View>
-      </Page>
+              {/* Right Column */}
+              <SafeView style={styles.rightPanel}>
+                <SafeView style={styles.rightPanelContent}>
+                  <SafeText style={styles.h2}>Professional Experience</SafeText>
+                  {Array.isArray(data.professional_experience) &&
+                    data.professional_experience.map((exp, i) => {
+                      try {
+                        if (!exp || typeof exp !== "string") return null
+                        return (
+                          <SafeView key={`prof-exp-${i}`} style={styles.experienceWrapper}>
+                            <SafeView style={styles.listItem}>
+                              <SafeView style={styles.squareBullet} />
+                              <SafeText style={styles.listItemText}>{exp}</SafeText>
+                            </SafeView>
+                          </SafeView>
+                        )
+                      } catch (error) {
+                        console.error("Error rendering professional experience:", error)
+                        return null
+                      }
+                    })}
+                </SafeView>
+              </SafeView>
+            </SafeView>
+          </SafeView>
+        </Page>
 
-      {/* Optional: Add additional custom pages */}
-      <ProfessionalExperiencePage data={data} />
-    </Document>
-  )
+        {/* Second Page: Professional Experience first, then Education */}
+        <ProfessionalExperiencePage data={data} />
+      </Document>
+    )
+  } catch (error) {
+    console.error("Error rendering ResumePDF:", error)
+    return (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <SafeView style={styles.errorContainer}>
+            <SafeText style={styles.errorText}>Error: Failed to render PDF</SafeText>
+            <SafeText>Please try again or contact support.</SafeText>
+          </SafeView>
+        </Page>
+      </Document>
+    )
+  }
 }
 
 export default ResumePDF
+
+
+
+
 
 
 

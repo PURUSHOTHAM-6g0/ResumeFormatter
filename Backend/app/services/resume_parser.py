@@ -5,8 +5,8 @@ import json
 import re
 import tempfile
 import os
-import base64  
-import fitz  
+import base64  # For encoding images
+import fitz  # PyMuPDF
 from PIL import Image
 import io
 from docx import Document  # For DOCX text extraction
@@ -222,10 +222,12 @@ def extract_resume_details_with_azure(text: str) -> dict:
         "- mobile\n"
         "- skills (group related skills together, and return as a list of objects with category as the key and related skills as the value. For example: [{ 'Programming Languages': ['Java', 'C++'] }, { 'Cloud': ['AWS', 'Docker'] }])\n"
         "- education (recently passed degree/institution)\n"
-        "- professional_experience (Try to get the entire resume summary. Note that it should be in format 'professional_experience':['point1','point2',..])\n"
+        "- professional_experience (CRITICAL: Summarize to fit EXACTLY 1000 characters or less. This must be concise but comprehensive, covering key achievements and technologies. Format as array: ['point1','point2',..])\n"
         "- certifications (as a list\check for certifications with images eg: microsoft certified Technology specialist)\n"
         "- experience_data (as a list of objects with each object containing the following keys: 'company', 'startDate', 'endDate', 'role', 'clientEngagement', 'program', and 'responsibilities' which is a list of bullet points describing duties)\n"
-        "Return the data as valid JSON. If there is no data available for a section, try to infer it from the resume. If there is no data available for a section, try to infer it from the resume. If not possible, return 'Not available' for that section."
+        "- summary (brief professional summary)\n"
+        "\nIMPORTANT: The professional_experience field MUST be summarized to fit within 1000 characters total (including all array elements). Prioritize most important achievements and technologies.\n"
+        "Return the data as valid JSON. If there is no data available for a section, try to infer it from the resume. If not possible, return 'Not available' for that section."
     )
 
     user_prompt = f"Resume Text:\n{text}"
@@ -267,10 +269,11 @@ def extract_resume_details_with_azure_vision(images: list) -> dict:
         "- mobile\n"
         "- skills (group related skills together, and return as a list of objects with category as the key and related skills as the value. For example: [{ 'Programming Languages': ['Java', 'C++'] }, { 'Cloud': ['AWS', 'Docker'] }])\n"
         "- education (recently passed degree/institution)\n"
-        "- professional_experience (Try to get the entire resume summary. Note that it should be in format 'professional_experience':['point1','point2',..])\n"
+        "- professional_experience (CRITICAL: Summarize to fit EXACTLY 1000 characters or less. This must be concise but comprehensive, covering key achievements and technologies. Format as array: ['point1','point2',..])\n"
         "- certifications (as a list\check for certifications with images eg: microsoft certified Technology specialist)\n"
-        "- experience_data (as a list of objects with each object containing the following keys: 'company', 'startDate', 'endDate', 'role', 'clientEngagement', 'program', and 'responsibilities' which is a list of bullet points describing duties)\n\n"
-        "CRITICAL INSTRUCTIONS FOR EXPERIENCE DATA EXTRACTION:\n"
+        "- experience_data (as a list of objects with each object containing the following keys: 'company', 'startDate', 'endDate', 'role', 'clientEngagement', 'program', and 'responsibilities' which is a list of bullet points describing duties)\n"
+        "- summary (brief professional summary)\n"
+        "\nCRITICAL INSTRUCTIONS FOR EXPERIENCE DATA EXTRACTION:\n"
         "- EXTRACT EVERY SINGLE ROW from ALL experience tables across ALL pages\n"
         "- Each table row represents a separate job/role and should be a separate object in the experience_data array\n"
         "- Do NOT skip any rows - process EVERY visible row in experience tables\n"
@@ -281,6 +284,11 @@ def extract_resume_details_with_azure_vision(images: list) -> dict:
         "- If you see only partial information in a row, still include it as a separate entry\n"
         "- Pay special attention to table borders and row separators to identify individual entries\n"
         "- Count the number of rows you process and ensure you capture ALL visible experience entries\n\n"
+        "PROFESSIONAL EXPERIENCE SUMMARIZATION:\n"
+        "- The professional_experience field MUST be summarized to fit within 1000 characters total (including all array elements)\n"
+        "- Prioritize most important achievements, technologies, and impact\n"
+        "- Use concise language while maintaining key information\n"
+        "- Focus on quantifiable results and technical skills\n\n"
         "TABLE PARSING STRATEGY:\n"
         "1. Identify ALL tables containing work experience information\n"
         "2. Process each table row by row from top to bottom\n"
@@ -291,7 +299,7 @@ def extract_resume_details_with_azure_vision(images: list) -> dict:
     )
 
     # Process ALL pages for complete coverage of 10-page resumes
-    content = [{"type": "text", "text": "Parse this complete resume. This is a 10-page document. Pay special attention to extracting ALL experience data from ALL table rows across ALL pages. DO NOT miss any rows in experience tables:"}]
+    content = [{"type": "text", "text": "Parse this complete resume. This is a 10-page document. Pay special attention to extracting ALL experience data from ALL table rows across ALL pages. DO NOT miss any rows in experience tables. IMPORTANT: Summarize professional_experience to exactly 1000 characters or less:"}]
     
     # Process ALL pages (up to 10 for complete coverage)
     max_pages = min(10, len(images))
@@ -333,3 +341,117 @@ def clean_json_string(raw: str):
     # Remove triple backticks and language hint (```json)
     cleaned = re.sub(r"^```json\s*|\s*```$", "", raw.strip(), flags=re.MULTILINE)
     return json.loads(cleaned)
+
+def validate_professional_experience_length(data: dict) -> dict:
+    """Validate and truncate professional_experience to fit 1000 characters"""
+    if 'professional_experience' in data and isinstance(data['professional_experience'], list):
+        # Calculate total length
+        total_length = sum(len(str(item)) for item in data['professional_experience'])
+        
+        if total_length > 1000:
+            print(f"Professional experience too long ({total_length} chars), truncating to 1000 chars")
+            
+            # Truncate items to fit within 1000 characters
+            truncated_items = []
+            current_length = 0
+            
+            for item in data['professional_experience']:
+                item_str = str(item)
+                if current_length + len(item_str) <= 1000:
+                    truncated_items.append(item)
+                    current_length += len(item_str)
+                else:
+                    # Add partial item if there's space
+                    remaining_space = 1000 - current_length
+                    if remaining_space > 10:  # Only add if meaningful space left
+                        truncated_item = item_str[:remaining_space-3] + "..."
+                        truncated_items.append(truncated_item)
+                    break
+            
+            data['professional_experience'] = truncated_items
+            print(f"Truncated to {len(truncated_items)} items, total length: {sum(len(str(item)) for item in truncated_items)} chars")
+    
+    return data
+
+# New function for processing multiple files
+def process_multiple_files(file_paths: list, use_vision: bool = True) -> list:
+    """Process multiple resume files and return combined results"""
+    results = []
+    
+    for file_path in file_paths:
+        try:
+            file_extension = os.path.splitext(file_path)[1].lower()
+            converted_pdf_path = None
+            
+            # Convert DOCX to PDF if using vision processing
+            if file_extension in ['.doc', '.docx'] and use_vision:
+                try:
+                    converted_pdf_path = convert_docx_to_pdf(file_path)
+                    file_extension = '.pdf'
+                    processing_path = converted_pdf_path
+                except Exception as e:
+                    print(f"DOCX to PDF conversion failed for {file_path}, falling back to text-based processing: {str(e)}")
+                    use_vision = False
+                    processing_path = file_path
+            else:
+                processing_path = file_path
+            
+            # Process using vision or text-based approach
+            if use_vision and file_extension == '.pdf':
+                try:
+                    images = convert_pdf_to_images(processing_path)
+                    extracted = extract_resume_details_with_azure_vision(images)
+                    parsed = clean_json_string(extracted)
+                    parsed = validate_professional_experience_length(parsed)
+                    processing_method = "vision"
+                except Exception as e:
+                    print(f"Vision processing failed for {file_path}, falling back to text-based: {str(e)}")
+                    use_vision = False
+            
+            if not use_vision:
+                if file_extension == '.pdf':
+                    text = extract_text_from_pdf(file_path)
+                elif file_extension in ['.doc', '.docx']:
+                    text = extract_text_from_docx(file_path)
+                else:
+                    raise Exception(f"Unsupported file type: {file_extension}")
+                
+                extracted = extract_resume_details_with_azure(text)
+                parsed = clean_json_string(extracted)
+                parsed = validate_professional_experience_length(parsed)
+                processing_method = "text"
+            
+            # Add filename to the result
+            parsed['filename'] = os.path.basename(file_path)
+            parsed['processing_method'] = processing_method
+            results.append(parsed)
+            
+            # Clean up converted PDF if it was created
+            if converted_pdf_path and os.path.exists(converted_pdf_path) and converted_pdf_path != file_path:
+                os.remove(converted_pdf_path)
+                
+        except Exception as e:
+            print(f"Error processing file {file_path}: {str(e)}")
+            results.append({
+                'filename': os.path.basename(file_path),
+                'error': str(e),
+                'processing_method': 'failed'
+            })
+    
+    return results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

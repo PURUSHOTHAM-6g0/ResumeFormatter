@@ -2,14 +2,14 @@
 
 import { useState, useRef, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
-import { Upload, File } from "lucide-react"
+import { Upload, File, X, Plus } from "lucide-react"
 import axios from "../api/axios"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 
 export function FileUpload() {
-  const [file, setFile] = useState(null)
+  const [files, setFiles] = useState([])
   const [dragActive, setDragActive] = useState(false)
   const [error, setError] = useState(null)
   const [uploading, setUploading] = useState(false)
@@ -17,6 +17,8 @@ export function FileUpload() {
   const [taskId, setTaskId] = useState(null)
   const [currentStage, setCurrentStage] = useState("")
   const [pollCount, setPollCount] = useState(0)
+  const [totalFiles, setTotalFiles] = useState(0)
+  const [processedFiles, setProcessedFiles] = useState(0)
   const inputRef = useRef(null)
   const navigate = useNavigate()
 
@@ -37,30 +39,40 @@ export function FileUpload() {
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ]
     if (!validTypes.includes(file.type)) {
-      setError("Please upload only PDF, DOC, or DOCX files.")
       return false
     }
-    setError(null)
     return true
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const droppedFile = e.dataTransfer.files[0]
-      if (validateFile(droppedFile)) {
-        setFile(droppedFile)
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const droppedFiles = Array.from(e.dataTransfer.files)
+      const validFiles = droppedFiles.filter(validateFile)
+
+      if (validFiles.length !== droppedFiles.length) {
+        setError("Some files were skipped. Only PDF, DOC, or DOCX files are supported.")
+      } else {
+        setError(null)
       }
+
+      setFiles((prev) => [...prev, ...validFiles])
     }
   }
 
   const handleChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const selectedFile = e.target.files[0]
-      if (validateFile(selectedFile)) {
-        setFile(selectedFile)
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFiles = Array.from(e.target.files)
+      const validFiles = selectedFiles.filter(validateFile)
+
+      if (validFiles.length !== selectedFiles.length) {
+        setError("Some files were skipped. Only PDF, DOC, or DOCX files are supported.")
+      } else {
+        setError(null)
       }
+
+      setFiles((prev) => [...prev, ...validFiles])
     }
   }
 
@@ -69,10 +81,21 @@ export function FileUpload() {
     inputRef.current?.click()
   }
 
+  const removeFile = (index) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index))
+    setError(null)
+  }
+
+  const clearAllFiles = () => {
+    setFiles([])
+    setError(null)
+  }
+
   const getStageMessage = (stage) => {
     const stageMessages = {
-      upload: "File uploaded successfully",
+      upload: "Files uploaded successfully",
       processing: "Starting processing...",
+      processing_multiple: "Processing multiple files...",
       converting_docx_to_pdf: "Converting pages to images...",
       conversion_to_image_all_pages: "Completed Converting pages to images...",
       parsing_all_pages_with_vision: "Analyzing document with AI...",
@@ -82,6 +105,15 @@ export function FileUpload() {
       completed: "Processing completed!",
       failed: "Processing failed",
     }
+
+    // Handle dynamic file processing messages
+    if (stage.includes("processing_file_")) {
+      const match = stage.match(/processing_file_(\d+)_of_(\d+)/)
+      if (match) {
+        return `Processing file ${match[1]} of ${match[2]}...`
+      }
+    }
+
     return stageMessages[stage] || "Processing..."
   }
 
@@ -120,6 +152,7 @@ export function FileUpload() {
           const stageProgress = {
             upload: 10,
             processing: 15,
+            processing_multiple: 20,
             converting_docx_to_pdf: 25,
             conversion_to_image_all_pages: 40,
             parsing_all_pages_with_vision: 70,
@@ -137,6 +170,12 @@ export function FileUpload() {
         setUploadProgress(targetProgress)
         setCurrentStage(progressData.stage || "processing")
 
+        // Update batch processing info if available
+        if (progressData.total_files) {
+          setTotalFiles(progressData.total_files)
+          setProcessedFiles(progressData.processed_files || 0)
+        }
+
         if (progressData.status === "completed" && progressData.data) {
           // Processing completed successfully
           setUploading(false)
@@ -147,8 +186,10 @@ export function FileUpload() {
           setTimeout(() => {
             navigate("/preview", {
               state: {
-                jsonData: progressData.data,
+                jsonData: Array.isArray(progressData.data) ? progressData.data[0] : progressData.data,
+                allData: progressData.data,
                 taskId: taskId,
+                isMultiple: Array.isArray(progressData.data) && progressData.data.length > 1,
               },
             })
           }, 1000)
@@ -160,6 +201,8 @@ export function FileUpload() {
           setUploadProgress(0)
           setCurrentStage("")
           setPollCount(0)
+          setTotalFiles(0)
+          setProcessedFiles(0)
         } else if (progressData.status === "processing" || progressData.status === "pending") {
           // Continue polling every 1.5 seconds
           setTimeout(() => pollProgress(taskId), 1500)
@@ -183,14 +226,16 @@ export function FileUpload() {
         setUploadProgress(0)
         setCurrentStage("")
         setPollCount(0)
+        setTotalFiles(0)
+        setProcessedFiles(0)
       }
     },
     [navigate], // Remove pollCount and uploadProgress from dependencies
   )
 
   const handleUpload = async () => {
-    if (!file) {
-      setError("Please select a file first.")
+    if (files.length === 0) {
+      setError("Please select at least one file.")
       return
     }
 
@@ -199,31 +244,65 @@ export function FileUpload() {
     setUploadProgress(0)
     setCurrentStage("uploading")
     setPollCount(0)
+    setProcessedFiles(0)
 
     try {
       const formData = new FormData()
-      formData.append("file", file)
 
-      // Simulate upload progress
-      simulateProgress(0, 10, 1000)
+      // Determine if single or multiple upload
+      const isMultiple = files.length > 1
 
-      const response = await axios.post("/resume/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
+      if (isMultiple) {
+        // Multiple file upload
+        files.forEach((file) => {
+          formData.append("files", file)
+        })
+        setTotalFiles(files.length)
 
-      const uploadResponse = response.data
+        // Simulate upload progress
+        simulateProgress(0, 10, 1000)
 
-      if (uploadResponse.task_id) {
-        setTaskId(uploadResponse.task_id)
-        setCurrentStage("processing")
-        setUploadProgress(15)
+        const response = await axios.post("/resume/upload-multiple", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
 
-        // Start polling for progress updates
-        setTimeout(() => pollProgress(uploadResponse.task_id), 1000)
+        const uploadResponse = response.data
+        setTotalFiles(uploadResponse.total_files || files.length)
+
+        if (uploadResponse.task_id) {
+          setTaskId(uploadResponse.task_id)
+          setCurrentStage("processing_multiple")
+          setUploadProgress(15)
+
+          // Start polling for progress updates
+          setTimeout(() => pollProgress(uploadResponse.task_id), 1000)
+        }
       } else {
-        // Fallback for direct response (if backend returns data immediately)
-        setUploadProgress(100)
-        navigate("/preview", { state: { jsonData: uploadResponse } })
+        // Single file upload
+        formData.append("file", files[0])
+        setTotalFiles(1)
+
+        // Simulate upload progress
+        simulateProgress(0, 10, 1000)
+
+        const response = await axios.post("/resume/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+
+        const uploadResponse = response.data
+
+        if (uploadResponse.task_id) {
+          setTaskId(uploadResponse.task_id)
+          setCurrentStage("processing")
+          setUploadProgress(15)
+
+          // Start polling for progress updates
+          setTimeout(() => pollProgress(uploadResponse.task_id), 1000)
+        } else {
+          // Fallback for direct response (if backend returns data immediately)
+          setUploadProgress(100)
+          navigate("/preview", { state: { jsonData: uploadResponse } })
+        }
       }
     } catch (err) {
       console.error(err)
@@ -233,14 +312,16 @@ export function FileUpload() {
       setUploadProgress(0)
       setCurrentStage("")
       setPollCount(0)
+      setTotalFiles(0)
+      setProcessedFiles(0)
     }
   }
 
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>Upload File</CardTitle>
-        <CardDescription>Upload a document to preview and download</CardDescription>
+        <CardTitle>Upload Files</CardTitle>
+        <CardDescription>Upload one or more documents to preview and download</CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -260,17 +341,27 @@ export function FileUpload() {
             accept=".pdf,.doc,.docx"
             onChange={handleChange}
             disabled={uploading}
+            multiple
           />
           <div className="flex flex-col items-center justify-center space-y-2">
             <div className="rounded-full bg-primary/10 p-3">
-              <File className="h-6 w-6 text-primary" />
+              {files.length > 0 ? (
+                <div className="flex items-center gap-1">
+                  <File className="h-6 w-6 text-primary" />
+                  <span className="text-sm font-medium text-primary">{files.length}</span>
+                </div>
+              ) : (
+                <Plus className="h-6 w-6 text-primary" />
+              )}
             </div>
             <div className="text-sm font-medium">
-              {file ? (
-                <span>{file.name}</span>
+              {files.length > 0 ? (
+                <span>
+                  {files.length} file{files.length > 1 ? "s" : ""} selected
+                </span>
               ) : (
                 <>
-                  Drag & drop your file here or <span className="text-primary underline">browse</span>
+                  Drag & drop your files here or <span className="text-primary underline">browse</span>
                 </>
               )}
             </div>
@@ -278,12 +369,51 @@ export function FileUpload() {
           </div>
         </div>
 
+        {/* File List */}
+        {files.length > 0 && (
+          <div className="mt-4 space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium">Selected Files:</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearAllFiles}
+                disabled={uploading}
+                className="text-red-500 hover:text-red-700"
+              >
+                Clear All
+              </Button>
+            </div>
+            <div className="max-h-32 overflow-y-auto space-y-1">
+              {files.map((file, index) => (
+                <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded text-sm">
+                  <span className="truncate flex-1">{file.name}</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => removeFile(index)}
+                    disabled={uploading}
+                    className="ml-2 h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {uploading && (
           <div className="mt-4 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-gray-600">{currentStage ? getStageMessage(currentStage) : "Processing..."}</span>
               <span className="text-gray-600">{uploadProgress}%</span>
             </div>
+            {totalFiles > 1 && (
+              <div className="text-xs text-gray-500">
+                Files processed: {processedFiles} / {totalFiles}
+              </div>
+            )}
             <Progress value={uploadProgress} className="h-2 bg-gray-200" />
             <div className="flex justify-center pt-2">
               <div className="animate-spin h-5 w-5 border-2 border-t-transparent border-blue-600 rounded-full" />
@@ -298,10 +428,10 @@ export function FileUpload() {
         <Button
           className="w-full bg-black text-white hover:bg-black/90"
           onClick={handleUpload}
-          disabled={uploading || !file}
+          disabled={uploading || files.length === 0}
         >
           <Upload className="mr-2 h-4 w-4" />
-          {uploading ? "Uploading..." : "Upload File"}
+          {uploading ? "Uploading..." : `Upload ${files.length} File${files.length > 1 ? "s" : ""}`}
         </Button>
       </CardFooter>
     </Card>
@@ -317,208 +447,3 @@ export function FileUpload() {
 
 
 
-
-// import React, { useState, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Upload, File } from "lucide-react";
-// import axios from "../api/axios";
-// import { Button } from "@/components/ui/button";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
-// import { Progress } from "@/components/ui/progress";
-
-// export function FileUpload() {
-//   const [file, setFile] = useState(null);
-//   const [dragActive, setDragActive] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [uploading, setUploading] = useState(false);
-//   const [uploadProgress, setUploadProgress] = useState(0);
-//   const inputRef = useRef(null);
-//   const navigate = useNavigate();
-
-//   const handleDrag = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     if (e.type === "dragenter" || e.type === "dragover") {
-//       setDragActive(true);
-//     } else if (e.type === "dragleave" || e.type === "drop") {
-//       setDragActive(false);
-//     }
-//   };
-
-//   const validateFile = (file) => {
-//     const validTypes = [
-//       "application/pdf",
-//       "application/msword",
-//       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-//     ];
-//     if (!validTypes.includes(file.type)) {
-//       setError("Please upload only PDF, DOC, or DOCX files.");
-//       return false;
-//     }
-//     setError(null);
-//     return true;
-//   };
-
-//   const handleDrop = (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-//       const droppedFile = e.dataTransfer.files[0];
-//       if (validateFile(droppedFile)) {
-//         setFile(droppedFile);
-//       }
-//     }
-//   };
-
-//   const handleChange = (e) => {
-//     if (e.target.files && e.target.files[0]) {
-//       const selectedFile = e.target.files[0];
-//       if (validateFile(selectedFile)) {
-//         setFile(selectedFile);
-//       }
-//     }
-//   };
-
-//   const handleClick = () => {
-//     if (uploading) return;
-//     inputRef.current?.click();
-//   };
-
-//   const simulateProgress = () => {
-//     let current = 0;
-//     const interval = setInterval(() => {
-//       current += 10;
-//       if (current <= 90) setUploadProgress(current);
-//       else clearInterval(interval);
-//     }, 100);
-//   };
-
-//   const handleUpload = async () => {
-//     if (!file) {
-//       setError("Please select a file first.");
-//       return;
-//     }
-
-//     setUploading(true);
-//     setError(null);
-//     setUploadProgress(0);
-//     simulateProgress();
-
-//     try {
-//       const formData = new FormData();
-//       formData.append("file", file);
-
-//       const response = await axios.post("/resume/upload", formData, {
-//         headers: { "Content-Type": "multipart/form-data" },
-//         onUploadProgress: (progressEvent) => {
-//           if (progressEvent.total) {
-//             const percentCompleted = Math.round(
-//               (progressEvent.loaded * 100) / progressEvent.total
-//             );
-//             setUploadProgress(percentCompleted);
-//           }
-//         },
-//       });
-
-//       setUploadProgress(100);
-//       navigate("/preview", { state: { jsonData: response.data } });
-//     } catch (err) {
-//       console.error(err);
-//       setError(
-//         err.response?.data?.detail || err.message || "Upload failed. Try again."
-//       );
-//     } finally {
-//       setUploading(false);
-//     }
-//   };
-
-//   return (
-//     <Card className="w-full max-w-md">
-//       <CardHeader>
-//         <CardTitle>Upload File</CardTitle>
-//         <CardDescription>
-//           Upload a document to preview and download
-//         </CardDescription>
-//       </CardHeader>
-
-//       <CardContent>
-//         <div
-//           className={`relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-12 text-center cursor-pointer select-none
-//             ${
-//               dragActive
-//                 ? "border-primary bg-primary/5"
-//                 : "border-gray-300 bg-white"
-//             }`}
-//           onDragEnter={handleDrag}
-//           onDragLeave={handleDrag}
-//           onDragOver={handleDrag}
-//           onDrop={handleDrop}
-//           onClick={handleClick}
-//         >
-//           <input
-//             ref={inputRef}
-//             type="file"
-//             className="hidden"
-//             accept=".pdf,.doc,.docx"
-//             onChange={handleChange}
-//             disabled={uploading}
-//           />
-//           <div className="flex flex-col items-center justify-center space-y-2">
-//             <div className="rounded-full bg-primary/10 p-3">
-//               <File className="h-6 w-6 text-primary" />
-//             </div>
-//             <div className="text-sm font-medium">
-//               {file ? (
-//                 <span>{file.name}</span>
-//               ) : (
-//                 <>
-//                   Drag & drop your file here or{" "}
-//                   <span className="text-primary underline">browse</span>
-//                 </>
-//               )}
-//             </div>
-//             <div className="text-xs text-gray-500">
-//               Supports PDF, DOC, and DOCX files
-//             </div>
-//           </div>
-//         </div>
-
-//         {uploading && (
-//           <div className="mt-4 space-y-2">
-//             <div className="flex justify-between text-sm">
-//               <span className="text-gray-600">Processing...</span>
-//               <span className="text-gray-600">{uploadProgress}%</span>
-//             </div>
-//             <Progress
-//               value={uploadProgress}
-//               className="h-2 bg-gray-200 [&>div]:bg-gray-400"
-//             />
-//             <div className="flex justify-center pt-2">
-//               <div className="animate-spin h-5 w-5 border-2 border-t-transparent border-black rounded-full" />
-//             </div>
-//           </div>
-//         )}
-
-//         {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
-//       </CardContent>
-
-//       <CardFooter>
-//         <Button
-//           className="w-full bg-black text-white hover:bg-black/90"
-//           onClick={handleUpload}
-//           disabled={uploading || !file}
-//         >
-//           <Upload className="mr-2 h-4 w-4" />
-//           {uploading ? "Uploading..." : "Upload File"}
-//         </Button>
-//       </CardFooter>
-//     </Card>
-//   );
-// }

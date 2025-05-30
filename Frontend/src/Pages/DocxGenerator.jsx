@@ -67,26 +67,12 @@ export const generateResumeDocx = async (data) => {
   saveAs(buffer, `${data.name || "resume"}.docx`)
 }
 
+// Update the DOCX generator to match the new layout (Professional Experience first, then Education)
 const createStyledSections = (data) => {
   const leftContent = []
   const rightContent = []
 
   // === LEFT CONTENT ===
-  // Education - Fixed to handle single string
-  if (data.education && data.education !== "Not available") {
-    leftContent.push(createSectionHeading("Education", "FFFFFF"))
-    const educationText = Array.isArray(data.education) ? data.education.join(", ") : data.education
-    leftContent.push(
-      trueBulletParagraph("", educationText, {
-        bulletColor: "FFFFFF",
-        valueColor: "FFFFFF",
-        lineSpacing: 276, // 1.15 line spacing
-        indent: { left: 300 },
-        valueFontSize: 18,
-      }),
-    )
-  }
-
   if (Array.isArray(data.skills) && data.skills.length > 0) {
     leftContent.push(createSectionHeading("Technical Expertise", "FFFFFF"))
     data.skills.forEach((skillGroup) => {
@@ -295,6 +281,7 @@ const createStyledSections = (data) => {
 
   const experienceDetail = []
 
+  // Professional Experience section - Now appears FIRST on second page
   if (Array.isArray(data.experience_data) && data.experience_data.length > 0) {
     experienceDetail.push(
       new Paragraph({
@@ -381,7 +368,12 @@ const createStyledSections = (data) => {
         )
       }
 
-      if (Array.isArray(exp.responsibilities) && exp.responsibilities.length > 0) {
+      // Only show responsibilities if they exist and are not empty
+      if (
+        Array.isArray(exp.responsibilities) &&
+        exp.responsibilities.length > 0 &&
+        exp.responsibilities[0] !== "Not available"
+      ) {
         experienceDetail.push(
           trueBulletParagraph("Responsibilities:", "", {
             bulletColor: "000000",
@@ -394,7 +386,7 @@ const createStyledSections = (data) => {
         )
 
         exp.responsibilities.forEach((res) => {
-          if (res?.trim()) {
+          if (res?.trim() && res !== "Not available") {
             experienceDetail.push(
               trueBulletParagraph("", res, {
                 bulletColor: "000000",
@@ -409,6 +401,38 @@ const createStyledSections = (data) => {
 
       experienceDetail.push(new Paragraph(""))
     })
+  }
+
+  // Education section - Now appears AFTER professional experience
+  if (data.education && data.education !== "Not available") {
+    experienceDetail.push(
+      new Paragraph({
+        spacing: { after: 300 },
+        children: [
+          new TextRun({
+            text: "Education",
+            bold: true,
+            size: 32,
+            font: "Arial",
+            color: "000000",
+          }),
+        ],
+      }),
+    )
+
+    const educationText = Array.isArray(data.education) ? data.education.join(", ") : data.education
+    experienceDetail.push(
+      trueBulletParagraph("Education: ", educationText, {
+        bulletColor: "000000",
+        labelColor: "000000",
+        valueColor: "000000",
+        labelBold: true,
+        lineSpacing: 276, // 1.15 line spacing
+        alignment: AlignmentType.JUSTIFIED,
+      }),
+    )
+
+    experienceDetail.push(new Paragraph(""))
   }
 
   return [
@@ -454,3 +478,25 @@ const createSectionHeading = (title, color = "000000") =>
       }),
     ],
   })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
